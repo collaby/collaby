@@ -20,7 +20,7 @@ return array(
     ),
     'db' => array(
         'driver' => 'Pdo',
-        'dsn' => 'pgsql:host=localhost;dbname=zf2napratica',
+        'dsn' => 'pgsql:host=localhost;dbname=collaby',
     ),
     'acl' => array(
         'roles' => array(
@@ -41,6 +41,8 @@ return array(
             'Application\Controller\Document.edit',
             'Application\Controller\Document.export',
             'Application\Controller\Document.import',
+            'Application\Controller\Document.clone',
+            'Application\Controller\User.view',
         ),
         'privilege' => array(
             'visitante' => array(
@@ -55,6 +57,8 @@ return array(
                     'Application\Controller\Document.edit',
                     'Application\Controller\Document.export',
                     'Application\Controller\Document.import',
+                    'Application\Controller\Document.clone',
+                    'Application\Controller\User.view',
                 )
             ),
             'redator' => array(

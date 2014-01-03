@@ -12,7 +12,8 @@ use Application\Form\Login;
 class AuthController extends ActionController {
 
     /**
-     * Faz o login do usuário
+     * Mapped as
+     *   /login
      * @return void
      */
     public function loginAction() {
@@ -38,7 +39,8 @@ class AuthController extends ActionController {
     }
 
     /**
-     * Faz o logout do usuário
+     * Mapped as
+     *   /logout
      * @return void
      */
     public function logoutAction() {

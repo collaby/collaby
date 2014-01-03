@@ -103,6 +103,28 @@ return array(
                     ),
                 ),
             ),
+            'clone-document' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/clone/:id',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Document',
+                        'action'     => 'clone',
+                        'module'     => 'application',
+                    ),
+                ),
+            ),
+            'view-user' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/u/:username',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\User',
+                        'action'     => 'view',
+                        'module'     => 'application',
+                    ),
+                ),
+            ),
             'application' => array(
                 'type'    => 'Literal',
                 'options' => array(
@@ -164,6 +186,7 @@ return array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
             'Application\Controller\Auth' => 'Application\Controller\AuthController',
             'Application\Controller\Document' => 'Application\Controller\DocumentController',
+            'Application\Controller\User' => 'Application\Controller\UserController',
         ),
     ),
     'view_manager' => array(
