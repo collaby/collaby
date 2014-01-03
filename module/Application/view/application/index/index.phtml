@@ -1,0 +1,45 @@
+
+
+<div class="row">
+    <div class="span6">
+        <h3>Lista de Posts</h3>
+    </div>
+    <div class="span6">
+        <a class="btn btn-primary btn-large pull-right" href="/admin/index/save"
+           title="Criar Post"><i class="fa fa-plus"></i> Criar Post</a>
+    </div>
+</div>
+
+<hr/>
+
+
+<?php foreach ($posts as $post): ?>
+    <div class="row">
+        <div class="span8">
+            <h3><?php echo $this->escapeHtml($post['title']); ?></h3>
+            <span class="muted"><?php echo $post['post_date']; ?></span>
+        </div>
+        <div class="span4">
+            <div class="btn-group pull-right">
+                <a href="/admin/index/save/id/<?php echo $post['id']; ?>"
+                   title="Editar" class="btn">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a href="/admin/index/delete/id/<?php echo $post['id']; ?>"
+                   rel="confirmation" title="Deseja excluir este registro?" class="btn btn-danger">
+                    <i class="fa fa-trash-o"></i>
+                </a>
+            </div>
+        </div>
+        <div class="span12">
+            <pre><?php echo $this->escapeHtml($post['description']); ?></pre>
+        </div>
+    </div>
+<hr/>
+<?php endforeach; ?>
+
+
+<?php
+echo $this->paginationControl(
+        $posts, 'Sliding', 'partials/paginator/control.phtml'
+);
