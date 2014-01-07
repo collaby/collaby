@@ -31,9 +31,6 @@ return array(
         'resources' => array(
             'Application\Controller\Index.index',
             'Application\Controller\Index.about',
-            'Admin\Controller\Index.save',
-            'Admin\Controller\Index.delete',
-            'Admin\Controller\Auth.index',
             'Application\Controller\Auth.login',
             'Application\Controller\Auth.logout',
             'Application\Controller\Index.signup',

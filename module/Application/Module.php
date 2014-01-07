@@ -62,32 +62,9 @@ class Module {
 
         $authService = $di->get('Application\Service\Auth');
         if (!$authService->authorize($moduleName, $controllerName, $actionName)) {
-            throw new \Exception('Você não tem permissão para acessar este recurso');
+            throw new \Exception('Você não tem permissão para acessar este recurso.');
         }
         return true;
-    }
-
-    /**
-     * Faz a autorização do usuário para acessar o recurso
-     * @param string $moduleName Nome do módulo sendo acessado
-     * @param string $controllerName Nome do controller
-     * @param string $actionName Nome da ação
-     * @return boolean
-     */
-    public function authorize($moduleName, $controllerName, $actionName) {
-        $auth = new AuthenticationService();
-        $role = 'visitante';
-        if ($auth->hasIdentity()) {
-            $session = $this->getServiceManager()->get('Session');
-            $user = $session->offsetGet('user');
-            $role = $user->role;
-        }
-        $resource = $controllerName . '.' . $actionName;
-        $acl = $this->getServiceManager()->get('Core\Acl\Builder')->build();
-        if ($acl->isAllowed($role, $resource)) {
-            return true;
-        }
-        return false;
     }
 
 }
