@@ -11,6 +11,10 @@
 namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
+use Application\Model\Document;
+use Application\Model\DocumentTable;
+use Zend\Db\ResultSet\ResultSet;
+ use Zend\Db\TableGateway\TableGateway;
 
 class Module {
 
@@ -66,5 +70,23 @@ class Module {
         }
         return true;
     }
+
+    public function getServiceConfig() {
+      return array(
+          'factories' => array(
+              'Application\Model\DocumentTable' => function($sm) {
+                  $tableGateway = $sm->get('DocumentTable');
+                  $table = new DocumentTable($tableGateway);
+                  return $table;
+               },
+               'DocumentTable' => function ($sm) {
+                  $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                  $resultSetPrototype = new ResultSet();
+                  $resultSetPrototype->setArrayObjectPrototype(new Document());
+                  return new TableGateway('documents', $dbAdapter, null, $resultSetPrototype);
+               },
+          ),
+      );
+   }
 
 }

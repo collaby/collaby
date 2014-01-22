@@ -4,7 +4,6 @@ namespace Application\Controller;
 
 use Core\Controller\ActionController;
 use Zend\View\Model\ViewModel;
-use Application\Model\Document;
 
 class IndexController extends ActionController {
 
@@ -13,11 +12,16 @@ class IndexController extends ActionController {
     *    /
     */
    public function indexAction() {
-      $adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
+      /*$adapter = $this->getServiceLocator()->get('Zend\Db\Adapter\Adapter');
       $model = new Document();
       $sql = $model->listLastDocuments();
       $st = $adapter->query($sql);
-      $list = $st->execute();
+      $list = $st->execute();*/
+      
+      $sm = $this->getServiceLocator();
+      $model = $sm->get('Application\Model\DocumentTable');
+      $list = $model->listLastDocuments();
+      
       return new ViewModel(array(
           'list' => $list
       ));

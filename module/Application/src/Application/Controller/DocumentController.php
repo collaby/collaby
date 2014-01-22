@@ -20,7 +20,20 @@ class DocumentController extends ActionController {
 		}
 		// TODO: criar documento, obter id, redirecionar para modo de edição do documento.
 		// esta action não deve ter view.
-		return new ViewModel(array('type' => $type));
+      
+      $sm = $this->getServiceLocator();
+      $model = $sm->get('Application\Model\DocumentTable');
+      $session = $sm->get('Session');
+      $user = $session->offsetGet('user');
+      $params = array(
+          'name' => 'Undefined',
+          'owner' => $user->id,
+          'document_type_id' => 1,
+          'template' => '\\begin{document}\n\\end{document}'
+      );
+      $id = $model->insert($params);
+      
+		return new ViewModel(array('type' => $type, 'id' => $id));
 	}
 
    /**
