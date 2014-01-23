@@ -84,8 +84,9 @@ class Module {
                'DocumentTable' => function ($sm) {
                   $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                   $resultSetPrototype = new ResultSet();
-                  $resultSetPrototype->setArrayObjectPrototype(new Document());
-                  return new TableGateway('documents', $dbAdapter, null, $resultSetPrototype);
+                  $model = new Document();
+                  $resultSetPrototype->setArrayObjectPrototype($model);
+                  return new TableGateway($model->getTableName(), $dbAdapter, null, $resultSetPrototype);
                },
               'Application\Model\TemplateTable' => function($sm) {
                   $tableGateway = $sm->get('TemplateTable');
@@ -95,8 +96,21 @@ class Module {
                'TemplateTable' => function ($sm) {
                   $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                   $resultSetPrototype = new ResultSet();
-                  $resultSetPrototype->setArrayObjectPrototype(new Template());
-                  return new TableGateway('templates', $dbAdapter, null, $resultSetPrototype);
+                  $model = new Template();
+                  $resultSetPrototype->setArrayObjectPrototype($model);
+                  return new TableGateway($model->getTableName(), $dbAdapter, null, $resultSetPrototype);
+               },
+              'Application\Model\DocumentTemplateTable' => function($sm) {
+                  $tableGateway = $sm->get('DocumentTemplateTable');
+                  $table = new DocumentTemplateTable($tableGateway);
+                  return $table;
+               },
+               'DocumentTemplateTable' => function ($sm) {
+                  $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                  $resultSetPrototype = new ResultSet();
+                  $model = new DocumentTemplate();
+                  $resultSetPrototype->setArrayObjectPrototype($model);
+                  return new TableGateway($model->getTableName(), $dbAdapter, null, $resultSetPrototype);
                },
           ),
       );

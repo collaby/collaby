@@ -30,23 +30,35 @@ class DocumentController extends ActionController {
       
       $sm = $this->getServiceLocator();
       $modelTemplates = $sm->get('Application\Model\TemplateTable');
+      $form = new NewDocument($modelTemplates, $type_id);
       
-      if ($this->getRequest()->isPost()) {
+      $request = $this->getRequest();
+      if ($request->isPost()) {
          $model = $sm->get('Application\Model\DocumentTable');
          $session = $sm->get('Session');
          $user = $session->offsetGet('user');
-         $params = array(
+         $form->setData($request->getPost());
+         if ($form->isValid()) {
+            $params = array(
+               'name' => $form->getInputFilter()->getValue('name'),
+               'owner' => $user->id,
+               'document_type_id' => $type_id,
+            );
+            $id = $model->insert($params);
+            $this->redirect()->toRoute('edit-document', array('id' => $id));
+         }
+         
+         /*$params = array(
              'name' => 'Undefined',
              'owner' => $user->id,
              'document_type_id' => $type_id,
          );
-         $id = $model->insert($params);
+         */
 
          // TODO: redirecionar para editar documento
-         return new ViewModel(array('type' => $type, 'id' => $id));
+         //return new ViewModel(array('type' => $type, 'id' => $id));
       }
       
-      $form = new NewDocument($modelTemplates, $type_id);
       return new ViewModel(array(
             'form' => $form
       ));
