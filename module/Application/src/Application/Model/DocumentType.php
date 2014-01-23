@@ -11,6 +11,9 @@ use Core\Model\Entity;
  */
 class DocumentType extends Entity {
    
+   const latex = 1;
+   const beamer = 2;
+   
    protected $tableName = 'document_types';
    
    /**

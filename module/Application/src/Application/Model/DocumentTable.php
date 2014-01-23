@@ -21,7 +21,7 @@ class DocumentTable {
 
    public function listLastDocuments() {
       $sql = "SELECT d.id, name, real_name, type, type_abbr, created_at,
-         to_char(created_at, 'DD \"de\" Mon \"de\", YYYY - HH24:MI') AS created_at_formated,
+         to_char(created_at, 'HH24:MI - DD \"de\" Mon \"de\" YYYY') AS created_at_formated,
          ARRAY((SELECT tag FROM tags t
             INNER JOIN document_tags dtag ON d.id = dtag.document_id AND t.id = dtag.tag_id)) as tags
         FROM documents d
@@ -29,7 +29,8 @@ class DocumentTable {
         INNER JOIN users u ON d.owner = u.id
         ORDER BY updated_at DESC, created_at DESC";
       
-      return $this->tableGateway->select();
+      $statement = $this->tableGateway->getAdapter()->createStatement($sql);
+      return $statement->execute();
    }
    
    /**

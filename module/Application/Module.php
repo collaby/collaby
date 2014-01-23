@@ -14,7 +14,9 @@ use Zend\Mvc\ModuleRouteListener;
 use Application\Model\Document;
 use Application\Model\DocumentTable;
 use Zend\Db\ResultSet\ResultSet;
- use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\TableGateway\TableGateway;
+use Application\Model\Template;
+use Application\Model\TemplateTable;
 
 class Module {
 
@@ -84,6 +86,17 @@ class Module {
                   $resultSetPrototype = new ResultSet();
                   $resultSetPrototype->setArrayObjectPrototype(new Document());
                   return new TableGateway('documents', $dbAdapter, null, $resultSetPrototype);
+               },
+              'Application\Model\TemplateTable' => function($sm) {
+                  $tableGateway = $sm->get('TemplateTable');
+                  $table = new TemplateTable($tableGateway);
+                  return $table;
+               },
+               'TemplateTable' => function ($sm) {
+                  $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                  $resultSetPrototype = new ResultSet();
+                  $resultSetPrototype->setArrayObjectPrototype(new Template());
+                  return new TableGateway('templates', $dbAdapter, null, $resultSetPrototype);
                },
           ),
       );
