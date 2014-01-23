@@ -29,11 +29,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>"><?php echo 'Project Collaby'; ?></a>
+                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>">collaby</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="<?php echo $this->url('home') ?>">Home</a></li>
+                        <li class="active"><a href="<?php echo $this->url('home') ?>">
+                                <?php echo $this->translate('Home') ?></a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-file"></i><b class="caret"></b></a>
@@ -46,18 +48,28 @@
 												</a></li>
                             </ul>
                         </li>
-                        <li><a href="<?php echo $this->url('about') ?>">About</a></li>
-                        <li><a href="<?php echo $this->url('signup') ?>">
-                                <?php echo $this->translate('Signup') ?>
-                            </a></li>
                         <li>
-                            <?php $user = $this->session()->offsetGet('user'); ?>
-                            <?php if ($user): ?>
-                                <a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a>
-                            <?php else: ?>
-                                <a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Login') ?></a>
-                            <?php endif; ?>
+                            <a href="<?php echo $this->url('about') ?>">
+                               <?php echo $this->translate('About') ?>
+                            </a>
                         </li>
+                        <?php $user = $this->session()->offsetGet('user'); ?>
+                        <?php if ($user): ?>
+                        <li>
+                            <a href="<?php echo $this->url('logout') ?>"><?php echo $this->translate('Logout') ?></a>
+                        </li>
+                        <?php else: ?>
+                        <li>
+                            <a href="<?php echo $this->url('signup') ?>">
+                                <?php echo $this->translate('Signup') ?>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo $this->url('login') ?>">
+                                <?php echo $this->translate('Login') ?>
+                            </a>
+                        </li>
+                        <?php endif; ?>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

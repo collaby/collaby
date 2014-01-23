@@ -1,7 +1,7 @@
 
 <div class="row">
    <div class="col-md-8">
-      <h4>New Document</h4><hr/>
+      <h4><?php echo $this->translate('New Document') ?></h4><hr/>
       <?php
       $form->prepare();
       echo $this->form()->openTag($form);
@@ -17,7 +17,7 @@
                           id="original_template_id"
                           value="<?php echo $index ?>"
                           <?php if ($form->get('original_template_id')->getValue() == $index): ?>
-                          checked="checked"
+                            checked="checked"
                           <?php endif; ?>
                           ><?php echo $value ?></label>
          </div>

@@ -7,13 +7,17 @@
    <div class="col-md-6 col-md-offset-2">
       <?php foreach ($list as $item): ?>
       <div class="media">
-            <a class="pull-left" href="#">
+          <a class="pull-left" href="<?php echo $this->url('edit-document', array('id' => $item['id'])) ?>">
                <img class="media-object" src="http://placehold.it/64&text=<?php echo $item['type_abbr']; ?>"
                     alt="<?php echo $item['type']; ?>" title="<?php echo $item['type']; ?>">
             </a>
             <div class="media-body">
-               <h4 class="media-heading"><a href="#"><?php echo $item['name']; ?></a></h4>
-               <p class="text-muted">por <a href="#"><?php echo $item['real_name']; ?></a>
+               <h4 class="media-heading">
+                   <a href="<?php echo $this->url('edit-document', array('id' => $item['id'])) ?>">
+                       <?php echo $item['name']; ?>
+                   </a>
+               </h4>
+               <p class="text-muted">by <a href="#"><?php echo $item['real_name']; ?></a>
                   <abbr class="timeago" title="<?php echo $item['created_at']; ?>">
                      <?php echo $item['created_at_formated']; ?>
                   </abbr>

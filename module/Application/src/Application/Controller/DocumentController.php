@@ -17,54 +17,56 @@ class DocumentController extends ActionController {
 	public function newAction() {
 		$type = $this->params()->fromRoute('type', 'latex');
 		// TODO: criar documento, obter id, redirecionar para modo de edição do documento.
-      switch ($type) {
-         case 'latex':
-            $type_id = DocumentType::latex;
-            break;
-         case 'beamer':
-            $type_id = DocumentType::beamer;
-            break;
-         default: // fallback to latex
-            $type_id = DocumentType::latex;
-      }
-      
-      $sm = $this->getServiceLocator();
-      $modelTemplates = $sm->get('Application\Model\TemplateTable');
-      $form = new NewDocument($modelTemplates, $type_id);
-      
-      $request = $this->getRequest();
-      if ($request->isPost()) {
-         $model = $sm->get('Application\Model\DocumentTable');
-         $session = $sm->get('Session');
-         $user = $session->offsetGet('user');
-         $form->setData($request->getPost());
-         if ($form->isValid()) {
-            $params = array(
-               'name' => $form->getInputFilter()->getValue('name'),
-               'owner' => $user->id,
-               'document_type_id' => $type_id,
-            );
-            $id = $model->insert($params);
-            $this->redirect()->toRoute('edit-document', array('id' => $id));
-         }
-         
-         /*$params = array(
-             'name' => 'Undefined',
-             'owner' => $user->id,
-             'document_type_id' => $type_id,
-         );
-         */
+        switch ($type) {
+            case 'latex':
+                $type_id = DocumentType::latex;
+                break;
+            case 'beamer':
+                $type_id = DocumentType::beamer;
+                break;
+            default: // fallback to latex
+                $type_id = DocumentType::latex;
+        }
 
-         // TODO: redirecionar para editar documento
-         //return new ViewModel(array('type' => $type, 'id' => $id));
-      }
-      
-      return new ViewModel(array(
+        $sm = $this->getServiceLocator();
+        $modelTemplates = $sm->get('Application\Model\TemplateTable');
+        $form = new NewDocument($modelTemplates, $type_id);
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $modelDocument = $sm->get('Application\Model\DocumentTable');
+            $session = $sm->get('Session');
+            $user = $session->offsetGet('user');
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $params = array(
+                    'name' => $form->getInputFilter()->getValue('name'),
+                    'owner' => $user->id,
+                    'document_type_id' => $type_id,
+                );
+                $conn = $sm->get("Zend\Db\Adapter\Adapter")->getDriver()->getConnection();
+                $conn->beginTransaction();
+                try {
+                    $id = $modelDocument->create($params);
+
+                    $modelDocumentTemplate = $sm->get('Application\Model\DocumentTemplateTable');
+                    $modelDocumentTemplate->create($id, $form->get('original_template_id')->getValue());
+
+                    $conn->commit();
+                    $this->redirect()->toRoute('edit-document', array('id' => $id));
+                } catch (\Exception $e) {
+                    $conn->rollback();
+                    $this->messages()->flashError('Unespected error. ' . $e->getMessage());
+                }
+            }
+        }
+
+        return new ViewModel(array(
             'form' => $form
-      ));
-	}
+        ));
+    }
 
-   /**
+    /**
     * Mapped as
     *    /d/:id
     * @return \Zend\View\Model\ViewModel

@@ -37,7 +37,7 @@ class DocumentTable {
     * 
     * @param array $params
     */
-   public function insert($params) {
+   public function create($params) {
       $this->tableGateway->insert($params);
       return $this->tableGateway->getAdapter()->getDriver()->getLastGeneratedValue($this->_sequence);
    }

@@ -173,7 +173,7 @@ class Messages extends AbstractPlugin
      */
     public function flashError($message)
     {
-        return $this->addFlashMessage('error', $message);
+        return $this->addFlashMessage('danger', $message);
     }
 
     /**
