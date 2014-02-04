@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.2
 -- Dumped by pg_dump version 9.3.2
--- Started on 2014-02-03 20:00:07 BRT
+-- Started on 2014-02-04 10:53:57 BRT
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -87,7 +87,7 @@ SET default_with_oids = false;
 
 --
 -- TOC entry 170 (class 1259 OID 17642)
--- Name: acl_actions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: acl_actions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE acl_actions (
@@ -98,7 +98,7 @@ CREATE TABLE acl_actions (
 
 --
 -- TOC entry 171 (class 1259 OID 17645)
--- Name: acl_controllers; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: acl_controllers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE acl_controllers (
@@ -109,7 +109,7 @@ CREATE TABLE acl_controllers (
 
 --
 -- TOC entry 172 (class 1259 OID 17648)
--- Name: acl_modules; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: acl_modules; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE acl_modules (
@@ -120,7 +120,7 @@ CREATE TABLE acl_modules (
 
 --
 -- TOC entry 173 (class 1259 OID 17651)
--- Name: acl_privileges; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: acl_privileges; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE acl_privileges (
@@ -132,7 +132,7 @@ CREATE TABLE acl_privileges (
 
 --
 -- TOC entry 174 (class 1259 OID 17655)
--- Name: acl_resources; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: acl_resources; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE acl_resources (
@@ -145,7 +145,7 @@ CREATE TABLE acl_resources (
 
 --
 -- TOC entry 175 (class 1259 OID 17658)
--- Name: acl_roles; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: acl_roles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE acl_roles (
@@ -157,7 +157,7 @@ CREATE TABLE acl_roles (
 
 --
 -- TOC entry 176 (class 1259 OID 17661)
--- Name: document_tags; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: document_tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE document_tags (
@@ -166,11 +166,9 @@ CREATE TABLE document_tags (
 );
 
 
-ALTER TABLE public.document_tags OWNER TO postgres;
-
 --
 -- TOC entry 177 (class 1259 OID 17664)
--- Name: document_templates; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: document_templates; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE document_templates (
@@ -180,11 +178,9 @@ CREATE TABLE document_templates (
 );
 
 
-ALTER TABLE public.document_templates OWNER TO postgres;
-
 --
 -- TOC entry 178 (class 1259 OID 17670)
--- Name: document_types; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: document_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE document_types (
@@ -196,7 +192,7 @@ CREATE TABLE document_types (
 
 --
 -- TOC entry 179 (class 1259 OID 17673)
--- Name: documents; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: documents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE documents (
@@ -216,7 +212,7 @@ CREATE TABLE documents (
 
 --
 -- TOC entry 180 (class 1259 OID 17680)
--- Name: documents_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: documents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE documents_id_seq
@@ -228,9 +224,9 @@ CREATE SEQUENCE documents_id_seq
 
 
 --
--- TOC entry 2191 (class 0 OID 0)
+-- TOC entry 2176 (class 0 OID 0)
 -- Dependencies: 180
--- Name: documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
@@ -238,7 +234,7 @@ ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
 
 --
 -- TOC entry 181 (class 1259 OID 17682)
--- Name: tags; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tags (
@@ -247,11 +243,9 @@ CREATE TABLE tags (
 );
 
 
-ALTER TABLE public.tags OWNER TO postgres;
-
 --
 -- TOC entry 182 (class 1259 OID 17685)
--- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE tags_id_seq
@@ -262,12 +256,10 @@ CREATE SEQUENCE tags_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.tags_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2192 (class 0 OID 0)
+-- TOC entry 2177 (class 0 OID 0)
 -- Dependencies: 182
--- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
@@ -275,7 +267,7 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 --
 -- TOC entry 183 (class 1259 OID 17687)
--- Name: templates; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: templates; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE templates (
@@ -286,11 +278,9 @@ CREATE TABLE templates (
 );
 
 
-ALTER TABLE public.templates OWNER TO postgres;
-
 --
 -- TOC entry 184 (class 1259 OID 17693)
--- Name: templates_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: templates_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE templates_id_seq
@@ -301,12 +291,10 @@ CREATE SEQUENCE templates_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.templates_id_seq OWNER TO postgres;
-
 --
--- TOC entry 2193 (class 0 OID 0)
+-- TOC entry 2178 (class 0 OID 0)
 -- Dependencies: 184
--- Name: templates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: templates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE templates_id_seq OWNED BY templates.id;
@@ -314,7 +302,7 @@ ALTER SEQUENCE templates_id_seq OWNED BY templates.id;
 
 --
 -- TOC entry 185 (class 1259 OID 17695)
--- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE users (
@@ -325,13 +313,16 @@ CREATE TABLE users (
     email character varying(150) NOT NULL,
     real_name character varying(200) NOT NULL,
     verified boolean DEFAULT false NOT NULL,
-    verifying_hash character varying(64) NOT NULL
+    verifying_hash character varying(64) NOT NULL,
+    salt character varying(64) NOT NULL,
+    lost_password_hash character varying(64),
+    lost_password_hash_validity timestamp without time zone
 );
 
 
 --
 -- TOC entry 186 (class 1259 OID 17702)
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE users_id_seq
@@ -343,16 +334,16 @@ CREATE SEQUENCE users_id_seq
 
 
 --
--- TOC entry 2194 (class 0 OID 0)
+-- TOC entry 2179 (class 0 OID 0)
 -- Dependencies: 186
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- TOC entry 1978 (class 2604 OID 28462)
+-- TOC entry 1996 (class 2604 OID 17710)
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -360,32 +351,32 @@ ALTER TABLE ONLY documents ALTER COLUMN id SET DEFAULT nextval('documents_id_seq
 
 
 --
--- TOC entry 2011 (class 2604 OID 17711)
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 1997 (class 2604 OID 17711)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
 
 
 --
--- TOC entry 2012 (class 2604 OID 17712)
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 1998 (class 2604 OID 17712)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY templates ALTER COLUMN id SET DEFAULT nextval('templates_id_seq'::regclass);
 
 
 --
--- TOC entry 2014 (class 2604 OID 17713)
--- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2000 (class 2604 OID 17713)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
--- TOC entry 2016 (class 2606 OID 17719)
--- Name: acl_actions_action_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2002 (class 2606 OID 17719)
+-- Name: acl_actions_action_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_actions
@@ -393,8 +384,8 @@ ALTER TABLE ONLY acl_actions
 
 
 --
--- TOC entry 2018 (class 2606 OID 17721)
--- Name: acl_actions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2004 (class 2606 OID 17721)
+-- Name: acl_actions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_actions
@@ -402,8 +393,8 @@ ALTER TABLE ONLY acl_actions
 
 
 --
--- TOC entry 2020 (class 2606 OID 17723)
--- Name: acl_controllers_controller_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2006 (class 2606 OID 17723)
+-- Name: acl_controllers_controller_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_controllers
@@ -411,8 +402,8 @@ ALTER TABLE ONLY acl_controllers
 
 
 --
--- TOC entry 2022 (class 2606 OID 17725)
--- Name: acl_controllers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2008 (class 2606 OID 17725)
+-- Name: acl_controllers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_controllers
@@ -420,8 +411,8 @@ ALTER TABLE ONLY acl_controllers
 
 
 --
--- TOC entry 2024 (class 2606 OID 17727)
--- Name: acl_modules_module_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2010 (class 2606 OID 17727)
+-- Name: acl_modules_module_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_modules
@@ -429,8 +420,8 @@ ALTER TABLE ONLY acl_modules
 
 
 --
--- TOC entry 2026 (class 2606 OID 17729)
--- Name: acl_modules_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2012 (class 2606 OID 17729)
+-- Name: acl_modules_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_modules
@@ -438,8 +429,8 @@ ALTER TABLE ONLY acl_modules
 
 
 --
--- TOC entry 2028 (class 2606 OID 17731)
--- Name: acl_privileges_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2014 (class 2606 OID 17731)
+-- Name: acl_privileges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_privileges
@@ -447,8 +438,8 @@ ALTER TABLE ONLY acl_privileges
 
 
 --
--- TOC entry 2030 (class 2606 OID 17733)
--- Name: acl_resources_module_id_controller_id_action_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2016 (class 2606 OID 17733)
+-- Name: acl_resources_module_id_controller_id_action_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_resources
@@ -456,8 +447,8 @@ ALTER TABLE ONLY acl_resources
 
 
 --
--- TOC entry 2032 (class 2606 OID 17735)
--- Name: acl_resources_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2018 (class 2606 OID 17735)
+-- Name: acl_resources_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_resources
@@ -465,8 +456,8 @@ ALTER TABLE ONLY acl_resources
 
 
 --
--- TOC entry 2034 (class 2606 OID 17737)
--- Name: acl_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2020 (class 2606 OID 17737)
+-- Name: acl_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_roles
@@ -474,8 +465,8 @@ ALTER TABLE ONLY acl_roles
 
 
 --
--- TOC entry 2036 (class 2606 OID 17739)
--- Name: acl_roles_role_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2022 (class 2606 OID 17739)
+-- Name: acl_roles_role_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY acl_roles
@@ -483,8 +474,8 @@ ALTER TABLE ONLY acl_roles
 
 
 --
--- TOC entry 2038 (class 2606 OID 17741)
--- Name: document_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2024 (class 2606 OID 17741)
+-- Name: document_tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY document_tags
@@ -492,8 +483,8 @@ ALTER TABLE ONLY document_tags
 
 
 --
--- TOC entry 2040 (class 2606 OID 17743)
--- Name: document_templates_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2026 (class 2606 OID 17743)
+-- Name: document_templates_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY document_templates
@@ -501,8 +492,8 @@ ALTER TABLE ONLY document_templates
 
 
 --
--- TOC entry 2042 (class 2606 OID 17745)
--- Name: document_types_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2028 (class 2606 OID 17745)
+-- Name: document_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY document_types
@@ -510,8 +501,8 @@ ALTER TABLE ONLY document_types
 
 
 --
--- TOC entry 2044 (class 2606 OID 17747)
--- Name: documents_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2030 (class 2606 OID 17747)
+-- Name: documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY documents
@@ -519,8 +510,8 @@ ALTER TABLE ONLY documents
 
 
 --
--- TOC entry 2048 (class 2606 OID 17749)
--- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2034 (class 2606 OID 17749)
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tags
@@ -528,8 +519,8 @@ ALTER TABLE ONLY tags
 
 
 --
--- TOC entry 2050 (class 2606 OID 17751)
--- Name: tags_tag_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2036 (class 2606 OID 17751)
+-- Name: tags_tag_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tags
@@ -537,8 +528,8 @@ ALTER TABLE ONLY tags
 
 
 --
--- TOC entry 2052 (class 2606 OID 17753)
--- Name: templates_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2038 (class 2606 OID 17753)
+-- Name: templates_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY templates
@@ -546,8 +537,17 @@ ALTER TABLE ONLY templates
 
 
 --
--- TOC entry 2054 (class 2606 OID 17755)
--- Name: users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2040 (class 2606 OID 17868)
+-- Name: unique_lost_password_hash; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT unique_lost_password_hash UNIQUE (lost_password_hash);
+
+
+--
+-- TOC entry 2042 (class 2606 OID 17755)
+-- Name: users_email_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -555,8 +555,17 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 2056 (class 2606 OID 17757)
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2044 (class 2606 OID 17866)
+-- Name: users_lost_password_hash_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_lost_password_hash_key UNIQUE (lost_password_hash);
+
+
+--
+-- TOC entry 2046 (class 2606 OID 17757)
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -564,8 +573,8 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 2058 (class 2606 OID 17759)
--- Name: users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2048 (class 2606 OID 17759)
+-- Name: users_username_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -573,24 +582,24 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 2045 (class 1259 OID 17760)
--- Name: index_created_at; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2031 (class 1259 OID 17760)
+-- Name: index_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_created_at ON documents USING btree (created_at);
 
 
 --
--- TOC entry 2046 (class 1259 OID 17761)
--- Name: index_updated_at; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2032 (class 1259 OID 17761)
+-- Name: index_updated_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_updated_at ON documents USING btree (updated_at);
 
 
 --
--- TOC entry 2059 (class 2606 OID 17762)
--- Name: acl_privileges_resource_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2049 (class 2606 OID 17762)
+-- Name: acl_privileges_resource_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_privileges
@@ -598,8 +607,8 @@ ALTER TABLE ONLY acl_privileges
 
 
 --
--- TOC entry 2060 (class 2606 OID 17767)
--- Name: acl_privileges_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2050 (class 2606 OID 17767)
+-- Name: acl_privileges_role_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_privileges
@@ -607,8 +616,8 @@ ALTER TABLE ONLY acl_privileges
 
 
 --
--- TOC entry 2061 (class 2606 OID 17772)
--- Name: acl_resources_action_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2051 (class 2606 OID 17772)
+-- Name: acl_resources_action_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_resources
@@ -616,8 +625,8 @@ ALTER TABLE ONLY acl_resources
 
 
 --
--- TOC entry 2062 (class 2606 OID 17777)
--- Name: acl_resources_controller_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2052 (class 2606 OID 17777)
+-- Name: acl_resources_controller_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_resources
@@ -625,8 +634,8 @@ ALTER TABLE ONLY acl_resources
 
 
 --
--- TOC entry 2063 (class 2606 OID 17782)
--- Name: acl_resources_module_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2053 (class 2606 OID 17782)
+-- Name: acl_resources_module_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_resources
@@ -634,8 +643,8 @@ ALTER TABLE ONLY acl_resources
 
 
 --
--- TOC entry 2064 (class 2606 OID 17787)
--- Name: acl_roles_parent_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2054 (class 2606 OID 17787)
+-- Name: acl_roles_parent_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY acl_roles
@@ -643,8 +652,8 @@ ALTER TABLE ONLY acl_roles
 
 
 --
--- TOC entry 2065 (class 2606 OID 17792)
--- Name: document_tags_document_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2055 (class 2606 OID 17792)
+-- Name: document_tags_document_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY document_tags
@@ -652,8 +661,8 @@ ALTER TABLE ONLY document_tags
 
 
 --
--- TOC entry 2066 (class 2606 OID 17797)
--- Name: document_tags_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2056 (class 2606 OID 17797)
+-- Name: document_tags_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY document_tags
@@ -661,8 +670,8 @@ ALTER TABLE ONLY document_tags
 
 
 --
--- TOC entry 2074 (class 2606 OID 17802)
--- Name: lnk_acl_roles_users; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2064 (class 2606 OID 17802)
+-- Name: lnk_acl_roles_users; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -670,8 +679,8 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 2069 (class 2606 OID 17807)
--- Name: lnk_document_types_documents; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2059 (class 2606 OID 17807)
+-- Name: lnk_document_types_documents; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY documents
@@ -679,8 +688,8 @@ ALTER TABLE ONLY documents
 
 
 --
--- TOC entry 2073 (class 2606 OID 17812)
--- Name: lnk_document_types_templates; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2063 (class 2606 OID 17812)
+-- Name: lnk_document_types_templates; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY templates
@@ -688,8 +697,8 @@ ALTER TABLE ONLY templates
 
 
 --
--- TOC entry 2067 (class 2606 OID 17817)
--- Name: lnk_documents_MM_templates; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2057 (class 2606 OID 17817)
+-- Name: lnk_documents_MM_templates; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY document_templates
@@ -697,8 +706,8 @@ ALTER TABLE ONLY document_templates
 
 
 --
--- TOC entry 2070 (class 2606 OID 17822)
--- Name: lnk_documents_documents; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2060 (class 2606 OID 17822)
+-- Name: lnk_documents_documents; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY documents
@@ -706,8 +715,8 @@ ALTER TABLE ONLY documents
 
 
 --
--- TOC entry 2068 (class 2606 OID 17827)
--- Name: lnk_templates_MM_documents; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2058 (class 2606 OID 17827)
+-- Name: lnk_templates_MM_documents; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY document_templates
@@ -715,8 +724,8 @@ ALTER TABLE ONLY document_templates
 
 
 --
--- TOC entry 2071 (class 2606 OID 17832)
--- Name: lnk_users_documents; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2061 (class 2606 OID 17832)
+-- Name: lnk_users_documents; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY documents
@@ -724,27 +733,15 @@ ALTER TABLE ONLY documents
 
 
 --
--- TOC entry 2072 (class 2606 OID 17837)
--- Name: lnk_users_documents_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 2062 (class 2606 OID 17837)
+-- Name: lnk_users_documents_1; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY documents
     ADD CONSTRAINT lnk_users_documents_1 FOREIGN KEY (updated_by) REFERENCES users(id) MATCH FULL ON UPDATE CASCADE ON DELETE CASCADE;
 
 
---
--- TOC entry 2188 (class 0 OID 0)
--- Dependencies: 6
--- Name: public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
-
-
--- Completed on 2014-02-03 20:00:07 BRT
+-- Completed on 2014-02-04 10:53:57 BRT
 
 --
 -- PostgreSQL database dump complete
