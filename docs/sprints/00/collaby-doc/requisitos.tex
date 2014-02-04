@@ -1,0 +1,249 @@
+\section{Requisitos}
+
+\subsection{Requisitos Funcionais}
+
+\subsubsection{Página inicial \label{home}}
+
+Mapeada como:
+\texttt{/ {[}Application\textbackslash{}Controller\textbackslash{}Index.index{]}}
+
+\paragraph{Usuário deslogado}
+
+Deve mostrar uma lista com os últimos documentos com a seguinte ordem:
+última atualização descendente.
+
+Na lista deve aparecer o nome do documento, um link para visualização,
+nome do dono do documento, link para o usuário dono, data de
+atualização, tags para o documento, link para buscar documento por tag.
+
+Caso o documento seja um clone mostrar o link para documento original.
+
+\paragraph{Usuário logado}
+
+Deve mostrar os documentos do usuário logado, permitindo link de edição
+ao invés de visualização.
+
+\subsubsection{Login}
+
+Mapeada como:
+\texttt{/login {[}Application\textbackslash{}Controller\textbackslash{}Auth.login{]}}
+
+Página de login tradicional usando usuário e senha, com adição da opção
+de login com a conta do \emph{Twitter}, \emph{Facebook} ou
+\emph{Google+}.
+
+Links úteis:
+
+\begin{itemize}
+\item
+  \url{https://dev.twitter.com/docs/auth/sign-twitter}
+\item
+  \url{https://developers.facebook.com/docs/facebook-login/login-flow-for-web/}
+\item
+  \url{https://developers.google.com/+/quickstart/javascript}
+\end{itemize}
+Colocar opções para Redefinir Senha \ref{reset-pass} e Criar Conta
+\ref{signup}.
+
+\subsubsection{Redefinir Senha \label{reset-pass}}
+
+Mapeado como:
+\texttt{/reset-password {[}Application\textbackslash{}Controller\textbackslash{}Account.reset-password{]}}
+
+Caso o usuário esqueça a senha é necessário que ele a redefina. Para
+isso ele deve preencher uma tela com os dados:
+
+\begin{itemize}
+\item
+  nome de usuário ou e-mail
+\item
+  Captcha, para garantir que não é um robô.
+\end{itemize}
+Em seguida um \emph{hash} de recuperação de senha é criado com a
+validade de 1 dia. Daí um e-mail é enviado para o usuário com os dados
+da solicitação: mensagem, link de recuperação, validade do link.
+
+Ao acessar o link, verifica se o \emph{hash} é válido e mostra a tela
+para digitar nova senha.
+
+\subsubsection{Criar Conta \label{signup}}
+
+Mapeado como:
+\texttt{/signup {[}Application\textbackslash{}Controller\textbackslash{}Account.signup{]}}
+
+Criar uma conta deve ser muito simples. A página requisita apenas:
+
+\begin{itemize}
+\item
+  nome de usuário
+\item
+  senha
+\item
+  e-mail
+\end{itemize}
+Em seguida um e-mail será enviado para o e-mail informado contendo uma
+mensagem de boas vindas e o link para a validação do cadastro. O link é
+composto pela url do site seguida de um \emph{hash}. Ao fazer a
+requisição o \emph{hash} é verificado com no banco de dados e o usuário
+é validado.
+
+O \emph{hash} deve ser criado a partir do nome do usuário, o e-mail e um
+\emph{salt}, que é um pequeno \emph{hash}.
+
+Referências sobre \emph{salt}:
+
+\begin{itemize}
+\item
+  \href{https://crackstation.net/hashing-security.htm\#salt}{Salted
+  Password Hashing - Doing it Right}
+\item
+  \href{http://en.wikipedia.org/wiki/Salt\_(cryptography)}{Salt
+  (cryptography)}
+\end{itemize}
+O nome de usuário deve ser único, assim como o e-mail. Assim sendo antes
+de criar a conta deve-se verificá-los antes de prosseguir com a criação
+da conta.
+
+\subsubsection{Novo Documento}
+
+Mapeado como:
+\texttt{/new {[}Application\textbackslash{}Controller\textbackslash{}Document.new{]}}
+
+Quando o usuário requisitar um novo documento, o mesmo é criado com
+valores padrão e logo em seguida o usuário é levado a Editar Documento
+\label{edit-document}.
+
+Ao editar o documento pela primeira vez, uma tela modal aparece para que
+o usuário possa editar o nome do documento e escolher um tema. Ao final
+ele clica em um botão ``Ok''.
+
+Daí ele vai para a edição do documento em si \ref{edit-document}.
+
+\subsubsection{Editar Documento \label{edit-document}}
+
+Mapeado como:
+\texttt{/d/:id {[}Application\textbackslash{}Controller\textbackslash{}Document.edit{]}}
+
+\paragraph{Usuário deslogado ou usuário logado que não é dono do
+documento}
+
+Redireciona usuário para modo de visualização (\emph{read-only})
+\ref{view-document}.
+
+\paragraph{Usuário logado e dono do documento}
+
+Abre o documento em modo de edição.
+
+Esta tela deve ser aberta em nova aba, isso se deve ao fato de que ela
+será uma tela diferenciada e além disso será uma tela que pode ser
+compartilhada para que outras pessoas possam editá-la ao mesmo tempo de
+forma colaborativa. Além disso faz com que não seja possível usar o
+botão ``Voltar'' do browser, tendo em vista que o histórico não existe
+numa aba aberta pela primeira vez.
+
+Ela possui um editor de texto com suporte a \emph{highlight} para
+\textbf{Markdown}.
+
+Deve haver um menu com as opções de Salvar e Pré-visualizar.
+
+Do lado esquerdo um menu para definir qual arquivo editar,
+\textbf{content} ou \textbf{template}.
+
+Logo abaixo a estrutura do arquivo em forma de árvore, onde aparecerão
+links para as linhas que iniciam com \#.
+
+E no rodapé uma caixa de mensagens, com o \emph{log} para detectar
+possíveis erros ao gerar o ducumento em pdf.
+
+\subsubsection{Exportar Documento}
+
+Mapeado como:
+\texttt{/d/:id/export{[}/:type{]} {[}Application\textbackslash{}Controller\textbackslash{}Document.export{]}}
+
+Opção vista em Editar Documento \ref{edit-document} e Visualizar
+Documento \ref{view-document}.
+
+Permite exportar o documento para PDF ou HTML, sendo o tipo padrão é
+PDF. Ao gerar o arquivo ele deve ser mandando para o browser em forma de
+download.
+
+Caso o arquivo seja HTML, ele deve ser mandado como um arquivo único.
+Isso significa que se ele possui CSS ou Javascript deve vir embutido no
+arquivo.
+
+\subsubsection{Importar Documento}
+
+Mapeado como:
+\texttt{/import {[}Application\textbackslash{}Controller\textbackslash{}Document.import{]}}
+
+Página destinada a usuários logados que desejam submeter um arquivo
+Markdown existente e a partir dele criar um documento.
+
+Além de um formulário contendo um \emph{input file} deve permitir o nome
+do arquivo bem como o layout a ser usado.
+
+\subsubsection{Clonar Documento}
+
+Mapeado como:
+\texttt{/clone/:id {[}Application\textbackslash{}Controller\textbackslash{}Document.clone{]}}
+
+Todo documento deve ser público, sendo posível assim clonar qualquer um
+deles. É possível clonar um documento a partir da página Visualizar
+Documento \ref{view-document}.
+
+É um processo simples onde todas as informações do documento são
+copiadas de um usuário para outro. Todavia, como um clone, a edição dos
+arquivos se torna independente.
+
+\subsubsection{Visualizar Usuário}
+
+Mapeado como:
+\texttt{/u/:username {[}Application\textbackslash{}Controller\textbackslash{}User.view{]}}
+
+Página destinada a mostrar dados e os documentos de um usuário. De onde
+outros usuário podem ver e clonar seus documentos.
+
+Os documentos tem a mesma visualização da página inicial \ref{home}.
+
+\subsubsection{Visualizar Documento \label{view-document}}
+
+Mapeado como:
+\texttt{/view/:id {[}Application\textbackslash{}Controller\textbackslash{}Document.view{]}}
+
+Visualização HTML do documento \textbf{Markdown} com suporte a fórmulas
+matemáticas (MathJax).
+
+\subsection{Requisitos Não-funcionais}
+
+\subsubsection{Traduzir a ferramenta TogetherJS}
+
+Por ser uma ferramenta muito nova ainda não possui tradução nem mesmo
+está sujeita ainda. Devido a isso temos duas opções:
+
+\begin{itemize}
+\item
+  Traduzir os arquivos de forma bruta (Mais fácil mas de difícil
+  manutenção pois quando a ferramenta for atualizada temos que sair de
+  arquivo em arquivo retraduzindo).
+\item
+  Criar um mecanismo de tradução que irá ajudar a ferramenta para que
+  seja possível traduzir para qualquer língua (Mais difícil mas podemos
+  ser os primeiros a tornar a ferramenta traduzível e contribuir com um
+  programa da Mozilla).
+\end{itemize}
+\subsubsection{Sincronização de cursor do Ace Editor}
+
+Existe um problema com a ferramenta TogetherJS em conjunto com o Ace
+Editor no qual quando o documento é atualizado o cursor dos outros
+participantes é resetado para o início do documento.
+
+Outros detalhes em:
+
+\begin{itemize}
+\item
+  \url{https://github.com/mozilla/togetherjs/pull/927}
+\item
+  \url{https://github.com/triglian/togetherjs}
+\item
+  \href{http://ace.c9.io/\#nav=about}{Ace Editor}
+\end{itemize}
