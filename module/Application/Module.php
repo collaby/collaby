@@ -19,6 +19,7 @@ use Application\Model\Template;
 use Application\Model\TemplateTable;
 use Application\Model\DocumentTemplate;
 use Application\Model\DocumentTemplateTable;
+use Locale;
 
 class Module {
 
@@ -40,6 +41,10 @@ class Module {
                 \Zend\Mvc\MvcEvent::EVENT_DISPATCH,
                 array($this, 'mvcPreDispatch'),
                 Module::PRIORIDADE_DISPATCH);
+        
+        $translator = $e->getApplication()->getServiceManager()->get('translator');
+        $translator->setLocale(Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+                ->setFallbackLocale('en_US');
     }
 
     public function getConfig() {

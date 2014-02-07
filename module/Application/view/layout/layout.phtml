@@ -1,3 +1,7 @@
+<?php
+namespace Application;
+?>
+
 <?php echo $this->doctype(); ?>
 <html>
     <head>
@@ -35,7 +39,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?php echo $this->url('home') ?>">
-                                <?php echo $this->translate('Home') ?></a>
+                                <?php echo $this->translate('Home', __NAMESPACE__) ?></a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

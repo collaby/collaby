@@ -1,4 +1,9 @@
 <?php
+
+namespace Application;
+
+use Application\Service\Auth;
+
 // module/Application/conﬁg/module.config.php:
 
 return array(
@@ -163,21 +168,22 @@ return array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
             'Session' => function($sm) {
-                return new Zend\Session\Container('ZF2napratica');
+                return new \Zend\Session\Container('ZF2napratica');
             },
             'Application\Service\Auth' => function($sm) {
                 $dbAdapter = $sm->get('DbAdapter');
-                return new Application\Service\Auth($dbAdapter);
+                return new Auth($dbAdapter);
             },
         ),
     ),
     'translator' => array(
-        'locale' => 'en_US',
+        'locale' => 'pt_BR',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo',
+                'text_domain' => __NAMESPACE__,
             ),
         ),
     ),
