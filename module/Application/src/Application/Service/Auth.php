@@ -43,20 +43,21 @@ class Auth extends Service {
          throw new \Exception("Parâmetros inválidos");
       }
       
-      $adapter = $this->getServiceManager()->get("Zend\Db\Adapter\Adapter");
-      $cparams = $adapter->getDriver()->getConnection()->getConnectionParameters();
-      $salt = $cparams['salt'];
-      $password = hash('sha256', $params['password'] . $salt);
+      //$adapter = $this->getServiceManager()->get("Zend\Db\Adapter\Adapter");
+      //$cparams = $adapter->getDriver()->getConnection()->getConnectionParameters();
+      //$salt = $cparams['salt'];
+      //$password = hash('sha256', $params['password'] . $salt);
       $auth = new AuthenticationService();
       $authAdapter = new AuthAdapter($this->dbAdapter);
       $authAdapter->setTableName('users')
               ->setIdentityColumn('username')
               ->setCredentialColumn('password')
+              ->setCredentialTreatment("sha256((? || salt)::bytea) AND verified = 'true'")
               ->setIdentity($params['username'])
-              ->setCredential($password);
+              ->setCredential($params['password']);
       $select = $authAdapter->getDbSelect();
       $select->join(array('r' => 'acl_roles'), 'users.acl_roles_id = r.id', array('role'));
-      $select->where("verified = 'true'");
+
       $result = $auth->authenticate($authAdapter);
       if (!$result->isValid()) {
          throw new \Exception("Login ou senha inválidos");
