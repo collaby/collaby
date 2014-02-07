@@ -7,6 +7,7 @@
         <!-- Le styles -->
         <?php
         echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/images/favicon.ico'))
+                ->prependStylesheet($this->basePath() . '/css/forms.css')
                 ->prependStylesheet($this->basePath() . '/css/navbar-fixed-top.css')
                 ->prependStylesheet($this->basePath() . '/lib/css/font-awesome.min.css')
                 ->prependStylesheet($this->basePath() . '/lib/css/bootstrap.min.css')

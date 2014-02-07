@@ -12,11 +12,17 @@ use Zend\View\Model\ViewModel;
  * @author atila
  */
 class AccountController extends ActionController {
-   
-   public function signupAction() {
-      $form = new Signup();
-      return new ViewModel(array(
-          'form' => $form
-      ));
-   }
+
+    /**
+     * Mapped as
+     *  /signup
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function signupAction() {
+        $form = new Signup();
+        return new ViewModel(array(
+            'form' => $form
+        ));
+    }
+
 }

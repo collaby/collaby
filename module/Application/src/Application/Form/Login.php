@@ -18,7 +18,7 @@ class Login extends Form {
     protected function _username() {
         $e = new Element\Text('username');
         $e->setAttribute("id", "username")
-                ->setAttribute("class", "form-control")
+                ->setAttribute("class", "form-control input-lg")
                 ->setAttribute("placeholder", "Username");
         
         return $e;
@@ -27,7 +27,7 @@ class Login extends Form {
     protected function _password() {
         $e = new Element\Password('password');
         $e->setAttribute("id", "password")
-                ->setAttribute("class", "form-control")
+                ->setAttribute("class", "form-control input-lg")
                 ->setAttribute("placeholder", "Password");
         
         return $e;
@@ -36,7 +36,7 @@ class Login extends Form {
     protected function _submit() {
         $e = new Element\Submit('submit');
         $e->setValue("Login")
-                ->setAttribute("class", "btn btn-primary btn-block");
+                ->setAttribute("class", "btn btn-primary btn-block btn-lg");
         
         return $e;
     }

@@ -53,7 +53,7 @@ class User extends Entity {
     protected $role;
 
     /**
-     * Configura os filtros dos campos da entidade
+     * @deprecated create a Class and implement InputFilterAwareInterface
      *
      * @return Zend\InputFilter\InputFilter
      */

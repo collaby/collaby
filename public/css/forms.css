@@ -1,0 +1,9 @@
+/* 
+    Created on : 07/02/2014, 15:05:24
+    Author     : atila
+*/
+
+.form-errors ul {
+   list-style: none;
+   color: #a94442;
+}

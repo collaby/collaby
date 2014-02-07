@@ -6,10 +6,16 @@
         echo $this->form()->openTag($form);
         ?>
         <div class="form-group">
-            <?php echo $this->formRow($form->get('username')); ?>
+            <?php echo $this->formInput($form->get('username')); ?>
+            <div class="form-errors">
+                <?php echo $this->formElementErrors($form->get('username')); ?>
+            </div>
         </div>
         <div class="form-group">
-            <?php echo $this->formRow($form->get('password')); ?>
+            <?php echo $this->formInput($form->get('password')); ?>
+            <div class="form-errors">
+                <?php echo $this->formElementErrors($form->get('password')); ?>
+            </div>
         </div>
 
         <?php
