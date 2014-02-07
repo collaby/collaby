@@ -36,8 +36,7 @@ class IndexController extends ActionController {
    }
 
    /**
-    * Mapped as
-    *   /signup
+    * @deprecated use Account#signup
     */
    public function signupAction() {
       

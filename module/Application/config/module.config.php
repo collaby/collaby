@@ -53,7 +53,7 @@ return array(
                 'options' => array(
                     'route'    => '/signup',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
+                        'controller' => 'Application\Controller\Account',
                         'action'     => 'signup',
                         'module'     => 'application',
                     ),
@@ -187,6 +187,7 @@ return array(
             'Application\Controller\Auth' => 'Application\Controller\AuthController',
             'Application\Controller\Document' => 'Application\Controller\DocumentController',
             'Application\Controller\User' => 'Application\Controller\UserController',
+            'Application\Controller\Account' => 'Application\Controller\AccountController',
         ),
     ),
     'view_manager' => array(
