@@ -16,6 +16,8 @@ INSERT INTO acl_controllers(id, controller) VALUES (2, 'Auth');
 INSERT INTO acl_controllers(id, controller) VALUES (3, 'Document');
 INSERT INTO acl_controllers(id, controller) VALUES (4, 'User');
 INSERT INTO acl_controllers(id, controller) VALUES (5, 'Account');
+INSERT INTO acl_controllers(id, controller) VALUES (6, 'Dashboard');
+INSERT INTO acl_controllers(id, controller) VALUES (7, 'Template');
 
 
 INSERT INTO acl_actions(id, action) VALUES (1, 'index');
@@ -42,6 +44,8 @@ INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (8, 1,
 INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (9, 1, 3, 9);
 INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (10, 1, 3, 10);
 INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (11, 1, 4, 11);
+INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (12, 2, 6, 1);
+INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (13, 2, 7, 1);
 
 
 INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (1, 1, true);
@@ -55,3 +59,5 @@ INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (8, 2, true);
 INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (9, 2, true);
 INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (10, 2, true);
 INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (11, 1, true);
+INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (12, 3, true);
+INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (13, 3, true);

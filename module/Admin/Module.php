@@ -2,6 +2,11 @@
 
 namespace Admin;
 
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Admin\Model\AdminTemplateTable;
+use Admin\Model\AdminTemplate;
+
 class Module {
     
     public function getAutoloaderConfig() {
@@ -30,4 +35,22 @@ class Module {
         
     }
 
+    public function getServiceConfig() {
+        return array(
+            'factories' => array(
+                'Admin\Model\AdminTemplateTable' => function ($sm) {
+                    $tableGateway = $sm->get('AdminTemplateTable');
+                    $table = new AdminTemplateTable($tableGateway);
+                    return $table;
+                },
+                'AdminTemplateTable' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $model = new AdminTemplate();
+                    $resultSetPrototype->setArrayObjectPrototype($model);
+                    return new TableGateway($model->getTableName(), $dbAdapter, null, $resultSetPrototype);
+                }
+            )
+        );
+    }
 }

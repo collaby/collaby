@@ -4,6 +4,7 @@ namespace Application\Model;
 
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Select;
+use Zend\Db\TableGateway\AbstractTableGateway;
 
 /**
  * Description of TemplateTable

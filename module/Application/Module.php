@@ -75,7 +75,8 @@ class Module {
 
         $authService = $di->get('Application\Service\Auth');
         if (!$authService->authorize($moduleName, $controllerName, $actionName)) {
-            throw new \Exception('Você não tem permissão para acessar este recurso.');
+            $redirect = $event->getTarget()->redirect();
+            return $redirect->toUrl('/login');
         }
         return true;
     }

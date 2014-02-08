@@ -12,7 +12,6 @@ use Application\Form\Post as PostForm;
  *
  * @category Admin
  * @package Controller
- * @author Elton Minetto <eminetto@coderockr.com>
  */
 class IndexController extends ActionController {
 
