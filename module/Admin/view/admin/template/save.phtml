@@ -1,0 +1,44 @@
+<?php
+    $this->headScript()->appendFile($this->basePath() . '/lib/js/ace/ace.js')
+            ->appendFile($this->basePath() . '/lib/js/ace/mode-latex.js')
+            ->appendFile($this->basePath() . '/js/admin/template/save.js')
+?>
+
+<style>
+    #editor {
+        position: relative;
+        width: 750px;
+        height: 300px;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+    }
+</style>
+
+<ol class="breadcrumb">
+    <li><a href="<?php echo $this->url('dashboard'); ?>">Dashboard</a></li>
+    <li><a href="<?php echo $this->url('dashboard_template'); ?>">Templates</a></li>
+  <li class="active">Save Template</li>
+</ol>
+
+<h4><?php echo $title; ?></h4><hr/>
+
+<div class="row">
+    <div class="col-md-8">
+        <?php
+        $form = $this->form;
+        $form->prepare();
+        echo $this->form()->openTag($form);
+        ?>
+        <div class="form-group">
+            <?php echo $this->formRow($form->get('description')); ?>
+        </div>
+        
+        <div id="editor"></div>
+        
+        <?php
+        echo $this->formRow($form->get('content'));
+        echo $this->formSubmit($form->get('submit'));
+        echo $this->form()->closeTag();
+        ?>
+    </div>
+</div>

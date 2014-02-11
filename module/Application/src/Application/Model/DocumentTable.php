@@ -36,6 +36,7 @@ class DocumentTable {
    /**
     * 
     * @param array $params
+    * @return int last generated value
     */
    public function create($params) {
       $this->tableGateway->insert($params);

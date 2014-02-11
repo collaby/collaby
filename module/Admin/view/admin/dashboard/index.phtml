@@ -1,11 +1,19 @@
 
+<ol class="breadcrumb">
+  <li class="active">Dashboard</li>
+</ol>
+
 <div class="row">
     <div class="col-md-4">
         <div class="panel panel-primary">
             <div class="panel-heading"><?php echo $this->translate('Templates') ?></div>
             <div class="list-group">
-                <a href="<?php echo $this->url('dashboard_template') ?>" class="list-group-item"><i class="fa fa-bars"></i> List All</a>
-                <a href="#" class="list-group-item"><i class="fa fa-plus"></i> Create New</a>
+                <a href="<?php echo $this->url('dashboard_template') ?>" class="list-group-item">
+                    <i class="fa fa-bars"></i> List All
+                </a>
+                <a href="<?php echo $this->url('dashboard_template', array('action' => 'save')) ?>" class="list-group-item">
+                    <i class="fa fa-plus"></i> Create New
+                </a>
             </div>
         </div>
     </div>
