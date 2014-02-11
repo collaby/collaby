@@ -1,5 +1,7 @@
 <?php
     $this->headScript()->appendFile($this->basePath() . '/lib/js/ace/ace.js')
+            // TODO: load ace mode depending of html_editor_mode in form.
+            ->appendFile($this->basePath() . '/lib/js/ace/mode-html.js')
             ->appendFile($this->basePath() . '/lib/js/ace/mode-latex.js')
             ->appendFile($this->basePath() . '/js/admin/template/save.js')
 ?>
@@ -37,6 +39,7 @@
         
         <?php
         echo $this->formRow($form->get('content'));
+        echo $this->formRow($form->get('html_editor_mode'));
         echo $this->formSubmit($form->get('submit'));
         echo $this->form()->closeTag();
         ?>

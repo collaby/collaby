@@ -1,7 +1,8 @@
 
 $(function() {
+   var html_editor_mode = $("#html_editor_mode").val();
    var doc = ace.edit('editor');
-   var Mode = require('ace/mode/latex').Mode;
+   var Mode = require('ace/mode/' + html_editor_mode).Mode;
    doc.getSession().setMode(new Mode());
    
    var content = $("#content");

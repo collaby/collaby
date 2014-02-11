@@ -17,6 +17,7 @@ class Template extends Form {
         $this->setAttribute('method', 'post');
         $this->add($this->_description());
         $this->add($this->_content());
+        $this->add($this->_html_editor_mode());
         $this->add($this->_submit());
     }
     
@@ -36,7 +37,13 @@ class Template extends Form {
         return $e;
     }
     
-    protected function _submit() {
+    protected function _html_editor_mode() {
+        $e = new Element\Hidden('html_editor_mode');
+        $e->setAttribute('id', 'html_editor_mode');
+        return $e;
+    }
+
+        protected function _submit() {
         $e = new Element\Submit('submit');
         $e->setValue("Save")
                 ->setAttribute("class", "btn btn-primary pull-right");
