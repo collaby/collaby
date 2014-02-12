@@ -106,4 +106,8 @@ class DocumentController extends ActionController {
    public function cloneAction() {
       // TODO: clone the document and redirect to edit
    }
+   
+   public function ajaxSaveAction() {
+       
+   }
 }

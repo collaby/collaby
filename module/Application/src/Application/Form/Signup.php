@@ -40,7 +40,7 @@ class Signup extends Form {
    }
    
    protected function _email() {
-      $e = new Element\Text('email');
+      $e = new Element\Email('email');
         $e->setAttribute("id", "email")
                 ->setAttribute("class", "form-control input-lg")
                 ->setAttribute("placeholder", "E-mail");

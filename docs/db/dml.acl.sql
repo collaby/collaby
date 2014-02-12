@@ -32,6 +32,7 @@ INSERT INTO acl_actions(id, action) VALUES (9, 'import');
 INSERT INTO acl_actions(id, action) VALUES (10, 'clone');
 INSERT INTO acl_actions(id, action) VALUES (11, 'view');
 INSERT INTO acl_actions(id, action) VALUES (12, 'save');
+INSERT INTO acl_actions(id, action) VALUES (13, 'ajax-save');
 
 
 INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (1, 1, 1, 1);
@@ -48,6 +49,7 @@ INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (11, 1
 INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (12, 2, 6, 1);
 INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (13, 2, 7, 1);
 INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (14, 2, 7, 12);
+INSERT INTO acl_resources(id, module_id, controller_id, action_id) VALUES (15, 1, 3, 13);
 
 
 INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (1, 1, true);
@@ -64,3 +66,4 @@ INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (11, 1, true);
 INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (12, 3, true);
 INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (13, 3, true);
 INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (14, 3, true);
+INSERT INTO acl_privileges(resource_id, role_id, allow) VALUES (15, 2, true);

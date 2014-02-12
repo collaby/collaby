@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.2
 -- Dumped by pg_dump version 9.3.2
--- Started on 2014-02-04 10:53:57 BRT
+-- Started on 2014-02-12 10:31:51 BRT
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -202,7 +202,6 @@ CREATE TABLE documents (
     id bigint NOT NULL,
     name character varying(200) NOT NULL,
     owner integer NOT NULL,
-    template text,
     updated_at timestamp without time zone,
     updated_by integer,
     url_to_share character varying(2000),
@@ -274,8 +273,18 @@ CREATE TABLE templates (
     content text NOT NULL,
     description character varying(50) NOT NULL,
     document_type_id integer NOT NULL,
-    id bigint NOT NULL
+    id bigint NOT NULL,
+    html_editor_mode character varying(20) NOT NULL
 );
+
+
+--
+-- TOC entry 2178 (class 0 OID 0)
+-- Dependencies: 183
+-- Name: COLUMN templates.html_editor_mode; Type: COMMENT; Schema: public; Owner: -
+--
+
+COMMENT ON COLUMN templates.html_editor_mode IS 'defines what language the editor must use to highlight';
 
 
 --
@@ -292,7 +301,7 @@ CREATE SEQUENCE templates_id_seq
 
 
 --
--- TOC entry 2178 (class 0 OID 0)
+-- TOC entry 2179 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: templates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -334,7 +343,7 @@ CREATE SEQUENCE users_id_seq
 
 
 --
--- TOC entry 2179 (class 0 OID 0)
+-- TOC entry 2180 (class 0 OID 0)
 -- Dependencies: 186
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
@@ -741,7 +750,7 @@ ALTER TABLE ONLY documents
     ADD CONSTRAINT lnk_users_documents_1 FOREIGN KEY (updated_by) REFERENCES users(id) MATCH FULL ON UPDATE CASCADE ON DELETE CASCADE;
 
 
--- Completed on 2014-02-04 10:53:57 BRT
+-- Completed on 2014-02-12 10:31:51 BRT
 
 --
 -- PostgreSQL database dump complete
