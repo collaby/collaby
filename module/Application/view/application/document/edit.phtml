@@ -1,3 +1,53 @@
 <?php
+    $this->headScript()->appendFile($this->basePath() . '/lib/js/ace/ace.js')
+            ->appendFile($this->basePath() . '/lib/js/ace/mode-markdown.js')
+            ->appendFile($this->basePath() . '/lib/js/mousetrap/mousetrap.min.js')
+            ->appendFile($this->basePath() . '/lib/js/mousetrap/mousetrap-global-bind.min.js')
+            ->appendFile($this->basePath() . '/js/application/document/edit.js')
+            ->appendFile($this->basePath() . '/js/application/document/edit/edition-bar.js')
+            ->appendFile($this->basePath() . '/js/application/document/edit/editor.js')
+            ->appendFile($this->basePath() . '/js/application/document/edit/shortcuts.js');
+?>
 
-echo $id;
+<style>
+    #editor {
+        position: relative;
+        width: 750px;
+        height: 300px;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+    }
+    
+    // TODO: modificar apenas o editor
+    ::-webkit-scrollbar {
+        width: 0.7em;
+    }
+
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(100, 100, 100, 0.8);
+    }
+
+    ::-webkit-scrollbar-corner,
+    ::-webkit-scrollbar-thumb:window-inactive {
+        background: rgba(100, 100, 100, 0.4);
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control"/>
+            </div>
+
+            <?php echo $this->partial('partials/document/edit/edition-bar'); ?>
+            <div id="editor"></div>
+        </form>
+        
+    </div>
+</div>

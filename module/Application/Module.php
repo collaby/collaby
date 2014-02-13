@@ -45,6 +45,9 @@ class Module {
         $translator = $e->getApplication()->getServiceManager()->get('translator');
         $translator->setLocale(Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']))
                 ->setFallbackLocale('en_US');
+        
+        // change layout dynamically
+        // http://stackoverflow.com/questions/16277251/zendframework-2-error-in-loading-layout-for-different-modules
     }
 
     public function getConfig() {

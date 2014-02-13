@@ -53,6 +53,7 @@ class NewDocument extends Form implements InputFilterProviderInterface {
          $options[$item->id] = $item->description;
       }
       $e->setValueOptions($options);
+      // TODO: set default value dynamically!
       $e->setValue("1");
       return $e;
    }
