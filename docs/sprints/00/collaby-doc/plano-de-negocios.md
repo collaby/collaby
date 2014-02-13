@@ -36,6 +36,7 @@ uma ferramenta que se encaixe no âmbito científico. Surge então o Projeto Col
 * [jQuery 2 - eventos, ajax](http://jquery.com/)
 * [Ace Editor](http://ace.c9.io/#nav=about)
 * [FontAwesome 4 - icon web fonts](http://FontAwesome.github.io/)
+* [Marked](https://github.com/chjj/marked)
 
 ## Visão Geral
 
@@ -47,6 +48,24 @@ onde é possível compartilhar exercícios, listas, materiais de estudo, apresen
 # Contexto do Negócio
 
 Funcionará no contexto acadêmico, tanto para discentes quanto docentes. É um projeto _free_ e _open-source_.
+
+#### Mas porque usar linguagem Markdown?
+
+Essa resposta pode ser obtida vendo o uso do Markdown na internet. Veja alguns sites que
+a utilizam:
+
+* [Github](http://github.com) - README e outros documentos; Wiki;
+* [Stackoverflow](http://stackoverflow.com/) - perguntas e respostas;
+* [Leanpub](https://leanpub.com/authors#how_leanpub_works) - autoria de livros;
+* [Ghost](https://ghost.org/) - blogging platform;
+* [dillinger](https://github.com/joemccann/dillinger) - editor _online_ com suporte a upload
+	para Dropbox, Google Drive ou Github.
+* entre outros.
+
+Além disso hoje temos a necessidade de ter livros, artigos ou outros tipos de texto
+disponíveis para Desktop, Tablet e smartphones. Dessa forma usar Markdown
+centraliza o foco no texto e deixa a formatação para outras ferramentas como
+o pandoc.
 
 # Objetivos do Produto
 
