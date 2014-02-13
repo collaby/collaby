@@ -48,6 +48,22 @@ onde é possível compartilhar exercícios, listas, materiais de estudo, apresen
 
 Funcionará no contexto acadêmico, tanto para discentes quanto docentes. É um projeto _free_ e _open-source_.
 
+#### Mas porque usar linguagem Markdown?
+
+Essa resposta pode ser obtida vendo o uso do Markdown na internet. Veja alguns sites que
+a utilizam:
+
+* [Github](http://github.com) - README e outros documentos; Wiki;
+* [Stackoverflow](http://stackoverflow.com/) - perguntas e respostas;
+* [Leanpub](https://leanpub.com/authors#how_leanpub_works) - autoria de livros;
+* [Ghost](https://ghost.org/) - blogging platform;
+* entre outros.
+
+Além disso hoje temos a necessidade de ter livros, artigos ou outros tipos de texto
+disponíveis para Desktop, Tablet e smartphones. Dessa forma usar Markdown
+centraliza o foco no texto e deixa a formatação para outras ferramentas como
+o pandoc.
+
 # Objetivos do Produto
 
 * Exercícios, materiais de aula, etc. são criados e compartilhados.
