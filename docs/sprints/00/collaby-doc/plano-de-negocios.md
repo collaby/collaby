@@ -36,6 +36,7 @@ uma ferramenta que se encaixe no âmbito científico. Surge então o Projeto Col
 * [jQuery 2 - eventos, ajax](http://jquery.com/)
 * [Ace Editor](http://ace.c9.io/#nav=about)
 * [FontAwesome 4 - icon web fonts](http://FontAwesome.github.io/)
+* [Marked](https://github.com/chjj/marked)
 
 ## Visão Geral
 
@@ -57,6 +58,8 @@ a utilizam:
 * [Stackoverflow](http://stackoverflow.com/) - perguntas e respostas;
 * [Leanpub](https://leanpub.com/authors#how_leanpub_works) - autoria de livros;
 * [Ghost](https://ghost.org/) - blogging platform;
+* [dillinger](https://github.com/joemccann/dillinger) - editor _online_ com suporte a upload
+	para Dropbox, Google Drive ou Github.
 * entre outros.
 
 Além disso hoje temos a necessidade de ter livros, artigos ou outros tipos de texto
