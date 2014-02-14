@@ -34,9 +34,10 @@ uma ferramenta que se encaixe no âmbito científico. Surge então o Projeto Col
 * [Zend Framework 2 - ambiente web estável e completo](http://framework.zend.com/zf2)
 * [Twitter Bootstrap 3 - front-end](http://getbootstrap.com/)
 * [jQuery 2 - eventos, ajax](http://jquery.com/)
-* [Ace Editor](http://ace.c9.io/#nav=about)
+* [Ace Editor - editor markdown web](http://ace.c9.io/#nav=about)
 * [FontAwesome 4 - icon web fonts](http://FontAwesome.github.io/)
-* [Marked](https://github.com/chjj/marked)
+* [Marked - fast mardown compiler](https://github.com/chjj/marked)
+* [localForage - offline storage](https://github.com/mozilla/localForage)
 
 ## Visão Geral
 
