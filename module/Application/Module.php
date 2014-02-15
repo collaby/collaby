@@ -19,6 +19,8 @@ use Application\Model\Template;
 use Application\Model\TemplateTable;
 use Application\Model\DocumentTemplate;
 use Application\Model\DocumentTemplateTable;
+use Application\Model\User;
+use Application\Model\UserTable;
 use Locale;
 
 class Module {
@@ -87,7 +89,7 @@ class Module {
     public function getServiceConfig() {
       return array(
           'factories' => array(
-              'Application\Model\DocumentTable' => function($sm) {
+              'Application\Model\DocumentTable' => function ($sm) {
                   $tableGateway = $sm->get('DocumentTable');
                   $table = new DocumentTable($tableGateway);
                   return $table;
@@ -99,7 +101,7 @@ class Module {
                   $resultSetPrototype->setArrayObjectPrototype($model);
                   return new TableGateway($model->getTableName(), $dbAdapter, null, $resultSetPrototype);
                },
-              'Application\Model\TemplateTable' => function($sm) {
+              'Application\Model\TemplateTable' => function ($sm) {
                   $tableGateway = $sm->get('TemplateTable');
                   $table = new TemplateTable($tableGateway);
                   return $table;
@@ -111,7 +113,7 @@ class Module {
                   $resultSetPrototype->setArrayObjectPrototype($model);
                   return new TableGateway($model->getTableName(), $dbAdapter, null, $resultSetPrototype);
                },
-              'Application\Model\DocumentTemplateTable' => function($sm) {
+              'Application\Model\DocumentTemplateTable' => function ($sm) {
                   $tableGateway = $sm->get('DocumentTemplateTable');
                   $table = new DocumentTemplateTable($tableGateway);
                   return $table;
@@ -123,6 +125,18 @@ class Module {
                   $resultSetPrototype->setArrayObjectPrototype($model);
                   return new TableGateway($model->getTableName(), $dbAdapter, null, $resultSetPrototype);
                },
+               'Application\Model\UserTable' => function ($sm) {
+                   $tableGateway = $sm->get('UserTable');
+                   $table = new UserTable($tableGateway);
+                   return $table;
+               },
+               'UserTable' => function ($sm) {
+                   $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                   $resultSetPrototype = new ResultSet();
+                   $model = new User();
+                   $resultSetPrototype->setArrayObjectPrototype($model);
+                   return new TableGateway($model->getTableName(), $dbAdapter, null, $resultSetPrototype);
+               }
           ),
       );
    }
