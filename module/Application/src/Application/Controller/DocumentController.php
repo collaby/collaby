@@ -4,19 +4,20 @@ namespace Application\Controller;
 
 use Core\Controller\ActionController;
 use Zend\View\Model\ViewModel;
+use Zend\View\Model\JsonModel;
 use Application\Model\DocumentType;
 use Application\Form\NewDocument;
 
 class DocumentController extends ActionController {
-	
-   /**
-    * Mapped as
-    *    /new[/:type]
-    * @return \Zend\View\Model\ViewModel
-    */
-	public function newAction() {
-		$type = $this->params()->fromRoute('type', 'latex');
-		// TODO: criar documento, obter id, redirecionar para modo de edição do documento.
+
+    /**
+     * Mapped as
+     *    /new[/:type]
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function newAction() {
+        $type = $this->params()->fromRoute('type', 'latex');
+        // TODO: criar documento, obter id, redirecionar para modo de edição do documento.
         switch ($type) {
             case 'latex':
                 $type_id = DocumentType::latex;
@@ -67,47 +68,55 @@ class DocumentController extends ActionController {
     }
 
     /**
-    * Mapped as
-    *    /d/:id
-    * @return \Zend\View\Model\ViewModel
-    */
-	public function editAction() {
-		$id = (int) $this->params()->fromRoute('id', 0);
-		return new ViewModel(array('id' => $id));
-	}
+     * Mapped as
+     *    /d/:id
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function editAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        return new ViewModel(array('id' => $id));
+    }
 
-   /**
-    * Mapped as
-    *    /d/:id/export[/:type]
-    * @return \Zend\View\Model\ViewModel
-    */
-	public function exportAction() {
-		$id = (int) $this->params()->fromRoute('id', 0);
-		$type = $this->params()->fromRoute('type', 'pdf');
-		if (! in_array($type, array('pdf', 'html'))) {
-			$this->messages()->flashWarning('Export type not found.');
-			return $this->redirect()->toUrl('/');
-		}
-		return new ViewModel(array('id' => $id, 'type' => $type));
-	}
+    /**
+     * Mapped as
+     *    /d/:id/export[/:type]
+     * @return \Zend\View\Model\ViewModel
+     */
+    public function exportAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $type = $this->params()->fromRoute('type', 'pdf');
+        if (!in_array($type, array('pdf', 'html'))) {
+            $this->messages()->flashWarning('Export type not found.');
+            return $this->redirect()->toUrl('/');
+        }
+        return new ViewModel(array('id' => $id, 'type' => $type));
+    }
 
-   /**
-    * Mapped as
-    *    /import
-    */
-	public function importAction() {
-		// TODO: upload markdown/text file
-	}
-   
-   /**
-    * Mapped as
-    *    /clone/:id
-    */
-   public function cloneAction() {
-      // TODO: clone the document and redirect to edit
-   }
-   
-   public function ajaxSaveAction() {
-       
-   }
+    /**
+     * Mapped as
+     *    /import
+     */
+    public function importAction() {
+        // TODO: upload markdown/text file
+    }
+
+    /**
+     * Mapped as
+     *    /clone/:id
+     */
+    public function cloneAction() {
+        // TODO: clone the document and redirect to edit
+    }
+
+    public function ajaxSaveAction() {
+        
+        $result = new JsonModel(array(
+	    'document_id' => 1,
+            'success'=>true,
+        ));
+
+        return $result;
+
+    }
+
 }
