@@ -74,7 +74,20 @@ class DocumentController extends ActionController {
      */
     public function editAction() {
         $id = (int) $this->params()->fromRoute('id', 0);
-        return new ViewModel(array('id' => $id));
+        $sm = $this->getServiceLocator();
+        $documentTable = $sm->get('Application\Model\DocumentTable');
+        $doc = $documentTable->getDocument($id);
+        
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            
+            // TO-DO
+        }
+        
+        return new ViewModel(array(
+            'id' => $id,
+            'doc' => $doc,
+        ));
     }
 
     /**
