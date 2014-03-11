@@ -19,55 +19,7 @@ return array(
         ),
     ),
     'db' => array(
-        'driver' => 'Pdo',
+        'driver' => 'Pdo_Pgsql',
         'dsn' => 'pgsql:host=localhost;dbname=collaby',
     ),
-    'acl' => array(
-        'roles' => array(
-            'visitante' => null,
-            'redator' => 'visitante',
-            'admin' => 'redator'
-        ),
-        'resources' => array(
-            'Application\Controller\Index.index',
-            'Application\Controller\Index.about',
-            'Application\Controller\Auth.login',
-            'Application\Controller\Auth.logout',
-            'Application\Controller\Index.signup',
-            'Application\Controller\Document.new',
-            'Application\Controller\Document.edit',
-            'Application\Controller\Document.export',
-            'Application\Controller\Document.import',
-            'Application\Controller\Document.clone',
-            'Application\Controller\User.view',
-        ),
-        'privilege' => array(
-            'visitante' => array(
-                'allow' => array(
-                    'Application\Controller\Index.index',
-                    'Application\Controller\Index.about',
-                    'Admin\Controller\Auth.index',
-                    'Application\Controller\Auth.login',
-                    'Application\Controller\Auth.logout',
-                    'Application\Controller\Index.signup',
-                    'Application\Controller\Document.new',
-                    'Application\Controller\Document.edit',
-                    'Application\Controller\Document.export',
-                    'Application\Controller\Document.import',
-                    'Application\Controller\Document.clone',
-                    'Application\Controller\User.view',
-                )
-            ),
-            'redator' => array(
-                'allow' => array(
-                    'Admin\Controller\Index.save',
-                )
-            ),
-            'admin' => array(
-                'allow' => array(
-                    'Admin\Controller\Index.delete',
-                )
-            ),
-        )
-    )
 );

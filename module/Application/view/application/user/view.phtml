@@ -1,4 +1,72 @@
-
 <?php
+   $this->headScript()->appendFile($this->basePath() . '/lib/js/jquery.timeago.min.js')
+           ->appendFile($this->basePath() . '/js/application/user/view.js');
+?>
 
-echo $username;
+<style>
+    .pic {
+        margin-top:50px; 
+        width:120px;
+        margin-left:50px;
+        margin-bottom:-60px;
+    }
+
+    .panel {
+        background-image:url("<?php echo $this->basePath() . '/images/user/wall.jpg' ?>");
+    }
+
+    .name {
+        position:absolute;
+        padding-left:200px;
+        font-size:30px;
+    }
+</style>
+
+<div class="row" style="margin-bottom: 50px;">
+    <div class="col-md-6 col-md-offset-2">
+        <div class="panel">
+            <img class="pic img-circle" src="<?php echo $this->basePath() . '/images/user/photo.png' ?>" alt="...">
+            <div class="name">
+                <small><?php echo $user['real_name'] ?></small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-2">
+        <?php if (empty($list)): ?>
+        <div class="alert alert-info">
+            Nenhum documento encontrado.
+        </div>
+        <?php else: ?>
+            <?php foreach ($list as $item): ?>
+            <div class="media">
+                <a class="pull-left" href="<?php echo $this->url('edit-document', array('id' => $item['id'])) ?>">
+                    <img class="media-object" src="http://placehold.it/64&text=<?php echo $item['type_abbr']; ?>"
+                         alt="<?php echo $item['type']; ?>" title="<?php echo $item['type']; ?>">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <a href="<?php echo $this->url('edit-document', array('id' => $item['id'])) ?>">
+                            <?php echo $item['name']; ?>
+                        </a>
+                    </h4>
+                    <p class="text-muted">by
+                        <a href="<?php echo $this->url('view-user', array('username' => $item['username'])); ?>">
+                            <?php echo $item['real_name']; ?>
+                        </a>
+                        <abbr class="timeago" title="<?php echo $item['created_at']; ?>">
+                            <?php echo $item['created_at_formated']; ?>
+                        </abbr>
+                    </p>
+                </div>
+            </div>
+
+            <hr/>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>

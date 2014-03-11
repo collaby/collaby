@@ -17,14 +17,17 @@
                        <?php echo $item['name']; ?>
                    </a>
                </h4>
-               <p class="text-muted">by <a href="#"><?php echo $item['real_name']; ?></a>
+                <p class="text-muted">by
+                    <a href="<?php echo $this->url('view-user', array('username' => $item['username'])); ?>">
+                    <?php echo $item['real_name']; ?>
+                    </a>
                   <abbr class="timeago" title="<?php echo $item['created_at']; ?>">
                      <?php echo $item['created_at_formated']; ?>
                   </abbr>
                </p>
                <p>
                   <?//php foreach ($item['tags'] as $tag): ?>
-                  <span class="label label-primary">álgebra</span>
+<!--                  <span class="label label-primary">álgebra</span>-->
                   <?//php endforeach; ?>
                </p>
             </div>
