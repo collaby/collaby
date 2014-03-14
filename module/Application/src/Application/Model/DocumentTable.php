@@ -76,4 +76,12 @@ class DocumentTable {
       }
       return $row;
    }
+   
+   public function save($params) {
+       if ($params['id'] == 0) {
+           return $this->create($params);
+       } 
+
+       $this->tableGateway->update($params, array('id' => $params['id']));       
+   }
 }

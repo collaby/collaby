@@ -11,7 +11,14 @@ var editor = function() {
 	}
 	
 	function save() {
-		
+        $.post('/application/document/ajax-save',{
+            id : $('#id').val(),
+            content : $('#content').val()
+        },
+        function(response) {
+            alert(response.message);
+        });
+        
 	}
 	
 	function preview() {

@@ -47,7 +47,8 @@
 
             <?php echo $this->partial('partials/document/edit/edition-bar'); ?>
             <div id="editor"></div>
-            <input type="hidden" id="content" value="<?php echo $doc->content; ?>" />
+            <input type="hidden" name="content" id="content" value="<?php echo $doc->content; ?>" />
+            <input type="hidden" name="id" id="id" value="<?php echo $doc->id; ?>" />
         </form>
         
     </div>
