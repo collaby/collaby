@@ -10,6 +10,17 @@ use Application\Form\NewDocument;
 
 class DocumentController extends ActionController {
 
+    protected $documentTable;
+
+    protected function getDocumentTable() {
+
+        if (!$this->documentTable) {
+            $sm = $this->getServiceLocator();
+            $this->documentTable = $sm->get('Application\Model\DocumentTable');
+        }
+        return $this->documentTable;
+    }
+
     /**
      * Mapped as
      *    /new[/:type]
@@ -35,7 +46,6 @@ class DocumentController extends ActionController {
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $modelDocument = $sm->get('Application\Model\DocumentTable');
             $session = $sm->get('Session');
             $user = $session->offsetGet('user');
             $form->setData($request->getPost());
@@ -48,7 +58,7 @@ class DocumentController extends ActionController {
                 $conn = $sm->get("Zend\Db\Adapter\Adapter")->getDriver()->getConnection();
                 $conn->beginTransaction();
                 try {
-                    $id = $modelDocument->create($params);
+                    $id = $this->documentTable->create($params);
 
                     $modelDocumentTemplate = $sm->get('Application\Model\DocumentTemplateTable');
                     $modelDocumentTemplate->create($id, $form->get('original_template_id')->getValue());
@@ -63,8 +73,8 @@ class DocumentController extends ActionController {
         }
 
         return new ViewModel(array(
-            'form' => $form
-        ));
+                    'form' => $form
+                ));
     }
 
     /**
@@ -74,16 +84,17 @@ class DocumentController extends ActionController {
      */
     public function editAction() {
         $id = (int) $this->params()->fromRoute('id', 0);
+        
         $sm = $this->getServiceLocator();
-        $documentTable = $sm->get('Application\Model\DocumentTable');
-        $doc = $documentTable->getDocument($id);
+        $this->documentTable = $sm->get('Application\Model\DocumentTable');
+        $doc = $this->documentTable->getDocument($id);
         
         $request = $this->getRequest();
         if ($request->isPost()) {
-            
+
             // TO-DO
         }
-        
+
         return new ViewModel(array(
             'id' => $id,
             'doc' => $doc,
@@ -123,13 +134,19 @@ class DocumentController extends ActionController {
 
     public function ajaxSaveAction() {
         
-        $result = new JsonModel(array(
-	    'document_id' => 1,
-            'success'=>true,
+        $data = array();
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $data = $this->params()->fromPost();
+            var_dump($data);
+            $sm = $this->getServiceLocator();
+            $this->documentTable = $sm->get('Application\Model\DocumentTable');
+            $this->documentTable->save($data);
+        }
+        
+        return new JsonModel(array(
+            'message' => "asdasdasd",
         ));
-
-        return $result;
-
     }
 
 }
