@@ -38,7 +38,7 @@
 </style>
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2 edit-content">
         <form>
             <div class="form-group">
                 <label for="name">Name</label>
@@ -52,6 +52,10 @@
         </form>
         
     </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 preview-content" style="display:none;"></div>
 </div>
 
 <?php echo $this->partial('partials/document/edit/modal-link'); ?>

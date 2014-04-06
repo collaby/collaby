@@ -119,6 +119,17 @@ return array(
                     ),
                 ),
             ),
+            'preview-document' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/preview/:id',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Document',
+                        'action'     => 'preview',
+                        'module'     => 'application',
+                    ),
+                ),
+            ),
             'view-user' => array(
                 'type' => 'Segment',
                 'options' => array(

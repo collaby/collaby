@@ -58,7 +58,7 @@ class DocumentController extends ActionController {
                 $conn = $sm->get("Zend\Db\Adapter\Adapter")->getDriver()->getConnection();
                 $conn->beginTransaction();
                 try {
-                    $id = $this->documentTable->create($params);
+                    $id = $this->getDocumentTable()->create($params);
 
                     $modelDocumentTemplate = $sm->get('Application\Model\DocumentTemplateTable');
                     $modelDocumentTemplate->create($id, $form->get('original_template_id')->getValue());
@@ -84,16 +84,14 @@ class DocumentController extends ActionController {
      */
     public function editAction() {
         $id = (int) $this->params()->fromRoute('id', 0);
-        
-        $sm = $this->getServiceLocator();
-        $this->documentTable = $sm->get('Application\Model\DocumentTable');
-        $doc = $this->documentTable->getDocument($id);
-        
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-
-            // TO-DO
-        }
+        $doc = $this->getDocumentTable()->getDocument($id);
+//        $sm = $this->getServiceLocator();
+//        $session = $sm->get('Session');
+//        $user = $session->offsetGet('user');
+//        
+//        if ($user->id != $doc->owner) {
+//            return $this->redirect()->toUrl('/application/preview/id/'.$id);
+//        }
 
         return new ViewModel(array(
             'id' => $id,
@@ -133,20 +131,46 @@ class DocumentController extends ActionController {
     }
 
     public function ajaxSaveAction() {
-        
         $data = array();
         $request = $this->getRequest();
         if ($request->isPost()) {
             $data = $this->params()->fromPost();
-            var_dump($data);
-            $sm = $this->getServiceLocator();
-            $this->documentTable = $sm->get('Application\Model\DocumentTable');
-            $this->documentTable->save($data);
+            $this->getDocumentTable()->save($data);
         }
         
         return new JsonModel(array(
             'message' => "asdasdasd",
         ));
+    }
+    
+    public function previewAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $doc = $this->getDocumentTable()->getDocument($id);
+        
+        $parse = new \Parsedown();
+        $md = $parse->parse($doc->content);
+        
+        $sm = $this->getServiceLocator();
+        $session = $sm->get('Session');
+        $user = $session->offsetGet('user');
+        
+        $checkOwner = $user->id === $doc->owner;
+        
+        $format = $this->params()->fromRoute('format', 'html');
+        if ($format === 'json') {
+            $viewModel = new JsonModel();
+        } else {
+            $viewModel = new ViewModel();
+        }
+        
+        return $viewModel->setVariables(
+            array(
+                'id' => $doc->id,
+                'name' => $doc->name,
+                'content' => $md,
+                'checkOwner' => $checkOwner,
+            )
+        );
     }
 
 }
