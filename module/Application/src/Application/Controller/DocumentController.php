@@ -50,10 +50,14 @@ class DocumentController extends ActionController {
             $user = $session->offsetGet('user');
             $form->setData($request->getPost());
             if ($form->isValid()) {
+                // TODO - store timezone of user
+                $date = new \DateTime('now', new \DateTimeZone('America/Fortaleza'));
+                
                 $params = array(
                     'name' => $form->getInputFilter()->getValue('name'),
                     'owner' => $user->id,
                     'document_type_id' => $type_id,
+                    'created_at' => $date->format('Y-m-d H:i:s.u'),
                 );
                 $conn = $sm->get("Zend\Db\Adapter\Adapter")->getDriver()->getConnection();
                 $conn->beginTransaction();

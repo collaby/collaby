@@ -29,7 +29,7 @@ class UserController extends ActionController {
         $user = $userTable->read($username);
         
         $documentTable = $sm->get('Application\Model\DocumentTable');
-        $list = $documentTable->listLastDocuments();
+        $list = $documentTable->listLastDocuments($username);
 
         return new ViewModel(array(
             'user' => $user,
