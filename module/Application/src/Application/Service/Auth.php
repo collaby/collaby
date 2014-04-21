@@ -16,6 +16,7 @@ use Zend\Db\Sql\Select;
 class Auth extends Service {
 
    const DEFAULT_ROLE = "visitor";
+   const DEFAULT_ROLE_ID = 1;
 
    /**
     * Adapter usado para a autenticação

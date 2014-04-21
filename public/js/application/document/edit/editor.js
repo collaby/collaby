@@ -11,11 +11,64 @@ var editor = function() {
 	}
 	
 	function save() {
-		
+        var id = $('#id').val(),
+            btn = $('#bt-save').find('i');
+        
+        btn.removeClass('fa-save').addClass('fa-refresh');
+
+        $.post('/application/document/ajax-save',{
+            id : id,
+            content : $('#content').val()
+        },
+        
+        function(res) {
+            btn.parent()
+                .addClass('btn-success');
+            setTimeout(function(){
+                btn.removeClass('fa-refresh')
+                    .addClass('fa-save')
+                    .parent()
+                    .removeClass('btn-success');
+            },1000);
+                
+        });
+        
 	}
-	
+    
+    
+   /**
+    * if preview is selected
+    *    call save current content and preview, hiding the editor area
+    * else
+    *    hide preview area and show editor
+    * @returns {void}
+    */
 	function preview() {
-		
+        var id = $('#id').val(),
+            btn = $('#bt-preview').find('i'),
+            preview = $('div.preview-content'),
+            editor = $('div.edit-content form #editor');
+        
+        if (editor.is(':visible') === true) {
+            editor.slideUp('fast');
+            btn.removeClass('fa-eye').addClass('fa-refresh');
+            
+            $.post('/application/document/ajax-save',{
+                id : id,
+                content : $('#content').val()
+            },
+            function(response) {
+                $.getJSON('/application/document/preview/id/'+id+'/format/json',
+                function(res){
+                    btn.removeClass('fa-refresh').addClass('fa-eye');
+                    preview.html(res.content).fadeIn('slow');
+                });
+            });
+            
+        } else {
+            editor.slideDown('fast');
+            preview.fadeOut('fast');
+        }
 	}
 	
 	function loadFileList() {
@@ -36,6 +89,13 @@ var editor = function() {
 		return '<i class="icon-spinner icon-spin"></i> Loading...';
 	}
 	
+   /**
+    * if something is selected
+    *    replace the selection with the text surrounded by **
+    * else
+    *    insert **{cursor}**
+    * @returns {void}
+    */
 	function bold() {
       var range = doc.getSelectionRange();
       if (range.isEmpty()) {
@@ -52,6 +112,13 @@ var editor = function() {
       doc.focus();
 	}
 	
+   /**
+    * if something is selected
+    *    replace the selection with the text surrounded by _
+    * else
+    *    insert _{cursor}_
+    * @returns {void}
+    */
 	function italic() {
       var range = doc.getSelectionRange();
       if (range.isEmpty()) {
@@ -68,6 +135,18 @@ var editor = function() {
       doc.focus();
 	}
 
+   /**
+    * if something is selected
+    *    if it's not the beginning of the line
+    *       put the text 2 line under
+    *    replace the selection starting with the level
+    * else
+    *    if it's not the beginning of the line
+    *       put the text 2 line under
+    *    insert level text
+    * @param {string} level it can be '#', '##', '###' ...
+    * @returns {void}
+    */
 	function header(level) {
       var range = doc.getSelectionRange();
       if (range.isEmpty()) {
@@ -90,12 +169,77 @@ var editor = function() {
       doc.focus();
 	}
 
+   /**
+    * if something is selected
+    *    if is multi line text
+    *       surround text with ~~~
+    *    else
+    *       surround text with `
+    *    replace selection
+    * else
+    *    if it's not the beginning of the line
+    *       use `{text}`
+    *    else
+    *       use ~~~\n{text}\n~~~
+    *    insert text
+    * @returns {void}
+    */
 	function code() {
+      var range = doc.getSelectionRange();
+      if (range.isEmpty()) {
+         var pos = range.end;
+         var text;
+         if (range.start.column > 0) {
+            text = "``";
+            pos.column += 1;
+         } else {
+            text = "~~~\n\n~~~";
+            pos.row += 1;
+         }
+         doc.insert(text);
+         doc.moveCursorToPosition(pos);
+      } else {
+         var selectedText = doc.getSession().getTextRange(range);
+         var text;
+         if (range.isMultiLine()) {
+            text = "~~~\n" + selectedText + "\n~~~";
+         } else {
+            text = "`" + selectedText + "`";
+         }
+         doc.getSession().replace(range, text);
+      }
+      doc.focus();
 	}
 
-	function link() {
+	function link(url, description) {
+      var range = doc.getSelectionRange();
+      if (range.isEmpty()) {
+         var text;
+         var pos = range.end;
+         if (description === "") {
+            text = "<" + url + ">";
+         } else {
+            text = "[" + description + "]("+ url + ")";
+         }
+         doc.insert(text);
+         doc.moveCursorToPosition(pos);
+      } else {
+         var selectedText = doc.getSession().getTextRange(range);
+         var text;
+         if (description === "") {
+            text = "<" + url + ">";
+         } else {
+            text = "[" + description + "]("+ url + ")";
+         }
+         doc.getSession().replace(range, text);
+      }
+      doc.focus();
 	}
 
+   /**
+    * TODO: complicado fazer por hora, envolve upload e outras coisas!
+    * @returns {undefined}
+    */
 	function picture() {
 	}
 	

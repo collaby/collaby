@@ -6,13 +6,22 @@
        echo $this->form()->openTag($form);
        ?>
       <div class="form-group">
-         <?php echo $this->formRow($form->get('username')); ?>
+         <?php echo $this->formInput($form->get('username')); ?>
+        <div class="form-errors">
+            <?php echo $this->formElementErrors($form->get('username')); ?>
+        </div>
       </div>
       <div class="form-group">
-         <?php echo $this->formRow($form->get('password')); ?>
+          <?php echo $this->formInput($form->get('password')); ?>
+          <div class="form-errors">
+              <?php echo $this->formElementErrors($form->get('password')); ?>
+          </div>
       </div>
       <div class="form-group">
-         <?php echo $this->formRow($form->get('email')); ?>
+          <?php echo $this->formInput($form->get('email')); ?>
+          <div class="form-errors">
+              <?php echo $this->formElementErrors($form->get('email')); ?>
+          </div>
       </div>
       
       <?php

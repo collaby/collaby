@@ -57,10 +57,16 @@ class Security {
     public function create_hash($password) {
         // format: algorithm:iterations:salt:hash
         $salt = base64_encode(mcrypt_create_iv(PBKDF2_SALT_BYTE_SIZE, MCRYPT_DEV_URANDOM));
-        return PBKDF2_HASH_ALGORITHM . ":" . PBKDF2_ITERATIONS . ":" . $salt . ":" .
+        return $salt;
+        // TODO: usar função completa no formato descrito acima
+        /*return PBKDF2_HASH_ALGORITHM . ":" . PBKDF2_ITERATIONS . ":" . $salt . ":" .
                 base64_encode(pbkdf2(
                                 PBKDF2_HASH_ALGORITHM, $password, $salt, PBKDF2_ITERATIONS, PBKDF2_HASH_BYTE_SIZE, true
-        ));
+        ));*/
+    }
+    
+    public function salt_password($password, $salt) {
+        return hash(PBKDF2_HASH_ALGORITHM, $password . $salt);
     }
 
     /**

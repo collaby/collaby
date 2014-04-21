@@ -50,7 +50,7 @@ $(function() {
 
 	Mousetrap.bindGlobal('ctrl+shift+l', function (e) {
 		prevent(e);
-		editor.link();
+		$("#modal-link").modal('show');
 	});
 
 	Mousetrap.bindGlobal('ctrl+shift+p', function (e) {
