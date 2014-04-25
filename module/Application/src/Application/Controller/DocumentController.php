@@ -7,6 +7,7 @@ use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 use Application\Model\DocumentType;
 use Application\Form\NewDocument;
+use Application\Model\Document;
 
 class DocumentController extends ActionController {
 
@@ -132,6 +133,14 @@ class DocumentController extends ActionController {
      */
     public function cloneAction() {
         // TODO: clone the document and redirect to edit
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $doc = $this->getDocumentTable()->getDocument($id);
+        $document = new Document();
+        $document->exchangeArray($doc);
+        echo "<pre>";
+        var_dump($document->toArray());
+        echo "</pre>";
+        
     }
 
     public function ajaxSaveAction() {
