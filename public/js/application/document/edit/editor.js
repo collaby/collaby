@@ -10,27 +10,26 @@ var editor = function() {
 		
 	}
 	
-	function save() {
-        var id = $('#id').val(),
-            btn = $('#bt-save').find('i');
+	function save(callback) {
+        var id = $('#id').val();
+            //btn = $('#bt-save').find('i');
         
-        btn.removeClass('fa-save').addClass('fa-refresh');
+        callback = callback || null;
+        
+        //btn.removeClass('fa-save').addClass('fa-refresh fa-spin');
+        _handle_save_button(true);
 
-        $.post('/application/document/ajax-save',{
+        $.post('/application/document/ajax-save', {
             id : id,
             content : $('#content').val()
         },
         
         function(res) {
-            btn.parent()
-                .addClass('btn-success');
-            setTimeout(function(){
-                btn.removeClass('fa-refresh')
-                    .addClass('fa-save')
-                    .parent()
-                    .removeClass('btn-success');
-            },1000);
-                
+            _handle_save_button(false);
+            
+            if (callback != null) {
+                callback();
+            }
         });
         
 	}
@@ -45,27 +44,24 @@ var editor = function() {
     */
 	function preview() {
         var id = $('#id').val(),
-            btn = $('#bt-preview').find('i'),
+            //btn = $('#bt-preview').find('i'),
             preview = $('div.preview-content'),
-            editor = $('div.edit-content form #editor');
+            editor = $('#editor');
         
         if (editor.is(':visible') === true) {
             editor.slideUp('fast');
-            btn.removeClass('fa-eye').addClass('fa-refresh');
-            
-            $.post('/application/document/ajax-save',{
-                id : id,
-                content : $('#content').val()
-            },
-            function(response) {
+            //btn.removeClass('fa-eye').addClass('fa-refresh fa-spin');
+            _handle_preview_button("previewing");
+            save(function() {
                 $.getJSON('/application/document/preview/id/'+id+'/format/json',
-                function(res){
-                    btn.removeClass('fa-refresh').addClass('fa-eye');
+                function (res) {
+                    //btn.removeClass('fa-refresh').removeClass('fa-spin').addClass('fa-times');
+                    _handle_preview_button("open");
                     preview.html(res.content).fadeIn('slow');
                 });
             });
-            
         } else {
+            _handle_preview_button();
             editor.slideDown('fast');
             preview.fadeOut('fast');
         }
@@ -262,6 +258,33 @@ var editor = function() {
 			return false;
 		}
 	}
+    
+    function _handle_save_button(isSaving) {
+        var button = $("#bt-save");
+        if (isSaving) {
+            button.html('<i class="fa fa-refresh fa-spin"></i> Saving...').addClass('btn-success');
+        } else {
+            button.html('<i class="fa fa-save"></i> Save').removeClass('btn-success');
+            setTimeout(function() {
+                button.removeClass('btn-success');
+            }, 1000);
+        }
+    }
+    
+    /**
+     * @param status String can be: previewing, open. Pass nothing for default.
+     */
+    function _handle_preview_button(status) {
+        status = status || "default";
+        var button = $("#bt-preview");
+        if (status === "previewing") {
+            button.html('<i class="fa fa-refresh fa-spin"></i> Generating...');
+        } else if (status === "open") {
+            button.html('<i class="fa fa-times"></i> Close');
+        } else {
+            button.html('<i class="fa fa-eye"></i> Preview');
+        }
+    }
 	
 	/* public functions and variables */
 	return {

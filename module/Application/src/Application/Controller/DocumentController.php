@@ -78,8 +78,8 @@ class DocumentController extends ActionController {
         }
 
         return new ViewModel(array(
-                    'form' => $form
-                ));
+            'form' => $form
+        ));
     }
 
     /**
