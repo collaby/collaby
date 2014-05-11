@@ -59,7 +59,7 @@ $(function() {
 		editor.picture();*/
 	});
 	
-	Mousetrap.bindGlobal('shift+alt+f', function(e) {
+	/*Mousetrap.bindGlobal('shift+alt+f', function(e) {
 		prevent(e);
 		latex_math.env_inline();
 	});
@@ -72,5 +72,5 @@ $(function() {
 	Mousetrap.bindGlobal('ctrl+alt+f', function(e) {
 		prevent(e);
 		latex_math.fraction();
-	});
+	});*/
 });
