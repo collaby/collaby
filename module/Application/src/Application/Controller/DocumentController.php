@@ -7,8 +7,20 @@ use Zend\View\Model\ViewModel;
 use Zend\View\Model\JsonModel;
 use Application\Model\DocumentType;
 use Application\Form\NewDocument;
+use Application\Model\Document;
 
 class DocumentController extends ActionController {
+
+    protected $documentTable;
+
+    protected function getDocumentTable() {
+
+        if (!$this->documentTable) {
+            $sm = $this->getServiceLocator();
+            $this->documentTable = $sm->get('Application\Model\DocumentTable');
+        }
+        return $this->documentTable;
+    }
 
     /**
      * Mapped as
@@ -35,20 +47,23 @@ class DocumentController extends ActionController {
 
         $request = $this->getRequest();
         if ($request->isPost()) {
-            $modelDocument = $sm->get('Application\Model\DocumentTable');
             $session = $sm->get('Session');
             $user = $session->offsetGet('user');
             $form->setData($request->getPost());
             if ($form->isValid()) {
+                // TODO - store timezone of user
+                $date = new \DateTime('now', new \DateTimeZone('America/Fortaleza'));
+                
                 $params = array(
                     'name' => $form->getInputFilter()->getValue('name'),
                     'owner' => $user->id,
                     'document_type_id' => $type_id,
+                    'created_at' => $date->format('Y-m-d H:i:s.u'),
                 );
                 $conn = $sm->get("Zend\Db\Adapter\Adapter")->getDriver()->getConnection();
                 $conn->beginTransaction();
                 try {
-                    $id = $modelDocument->create($params);
+                    $id = $this->getDocumentTable()->create($params);
 
                     $modelDocumentTemplate = $sm->get('Application\Model\DocumentTemplateTable');
                     $modelDocumentTemplate->create($id, $form->get('original_template_id')->getValue());
@@ -74,16 +89,15 @@ class DocumentController extends ActionController {
      */
     public function editAction() {
         $id = (int) $this->params()->fromRoute('id', 0);
-        $sm = $this->getServiceLocator();
-        $documentTable = $sm->get('Application\Model\DocumentTable');
-        $doc = $documentTable->getDocument($id);
-        
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            
-            // TO-DO
-        }
-        
+        $doc = $this->getDocumentTable()->getDocument($id);
+//        $sm = $this->getServiceLocator();
+//        $session = $sm->get('Session');
+//        $user = $session->offsetGet('user');
+//        
+//        if ($user->id != $doc->owner) {
+//            return $this->redirect()->toUrl('/application/preview/id/'.$id);
+//        }
+
         return new ViewModel(array(
             'id' => $id,
             'doc' => $doc,
@@ -119,17 +133,57 @@ class DocumentController extends ActionController {
      */
     public function cloneAction() {
         // TODO: clone the document and redirect to edit
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $doc = $this->getDocumentTable()->getDocument($id);
+        $document = new Document();
+        $document->exchangeArray($doc);
+        echo "<pre>";
+        var_dump($document->toArray());
+        echo "</pre>";
+        
     }
 
     public function ajaxSaveAction() {
+        $data = array();
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $data = $this->params()->fromPost();
+            $this->getDocumentTable()->save($data);
+        }
         
-        $result = new JsonModel(array(
-	    'document_id' => 1,
-            'success'=>true,
+        return new JsonModel(array(
+            'message' => "asdasdasd",
         ));
-
-        return $result;
-
+    }
+    
+    public function previewAction() {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        $doc = $this->getDocumentTable()->getDocument($id);
+        
+        $parse = new \Parsedown();
+        $md = $parse->parse($doc->content);
+        
+        $sm = $this->getServiceLocator();
+        $session = $sm->get('Session');
+        $user = $session->offsetGet('user');
+        
+        $checkOwner = $user->id === $doc->owner;
+        
+        $format = $this->params()->fromRoute('format', 'html');
+        if ($format === 'json') {
+            $viewModel = new JsonModel();
+        } else {
+            $viewModel = new ViewModel();
+        }
+        
+        return $viewModel->setVariables(
+            array(
+                'id' => $doc->id,
+                'name' => $doc->name,
+                'content' => $md,
+                'checkOwner' => $checkOwner,
+            )
+        );
     }
 
 }

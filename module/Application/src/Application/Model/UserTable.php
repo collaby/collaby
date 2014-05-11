@@ -48,4 +48,12 @@ class UserTable {
        
        $this->create($params);
    }
+   
+   public function read($username) {
+       $sql = "SELECT username, email, real_name
+            FROM users
+            WHERE username = ?";
+       $statement = $this->tableGateway->getAdapter()->createStatement($sql, array($username));
+       return $statement->execute()->current();
+   }
 }

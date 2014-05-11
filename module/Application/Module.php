@@ -28,7 +28,6 @@ class Module {
     const PRIORIDADE_DISPATCH = 100;
     
     public function onBootstrap($e) {
-        $e->getApplication()->getServiceManager()->get('translator');
         $eventManager = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
@@ -44,9 +43,9 @@ class Module {
                 array($this, 'mvcPreDispatch'),
                 Module::PRIORIDADE_DISPATCH);
         
-        $translator = $e->getApplication()->getServiceManager()->get('translator');
+        /*$translator = $e->getApplication()->getServiceManager()->get('translator');
         $translator->setLocale(Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']))
-                ->setFallbackLocale('en_US');
+                ->setFallbackLocale('pt_BR');*/
         
         // change layout dynamically
         // http://stackoverflow.com/questions/16277251/zendframework-2-error-in-loading-layout-for-different-modules

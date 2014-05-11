@@ -19,17 +19,24 @@ class DocumentTable {
       $this->tableGateway = $tableGateway;
    }
 
-   public function listLastDocuments() {
-      $sql = "SELECT d.id, name, real_name, type, type_abbr, created_at,
+   public function listLastDocuments($username = null) {
+      $sql = "SELECT d.id, name, real_name, username, type, type_abbr, created_at,
          to_char(created_at, 'HH24:MI - DD \"de\" Mon \"de\" YYYY') AS created_at_formated,
          ARRAY((SELECT tag FROM tags t
             INNER JOIN document_tags dtag ON d.id = dtag.document_id AND t.id = dtag.tag_id)) as tags
         FROM documents d
         INNER JOIN document_types dt ON d.document_type_id = dt.id
-        INNER JOIN users u ON d.owner = u.id
-        ORDER BY updated_at DESC, created_at DESC";
+        INNER JOIN users u ON d.owner = u.id ";
       
-      $statement = $this->tableGateway->getAdapter()->createStatement($sql);
+      $params =  null;
+      if (! empty($username)) {
+          $sql .= " WHERE u.username = ? ";
+          $params = array($username);
+      }
+      
+      $sql .= " ORDER BY updated_at DESC, created_at DESC";
+      
+      $statement = $this->tableGateway->getAdapter()->createStatement($sql, $params);
       return $statement->execute();
    }
    
@@ -75,5 +82,13 @@ class DocumentTable {
          throw new \Exception("Could not find row $id");
       }
       return $row;
+   }
+   
+   public function save($params) {
+       if ($params['id'] == 0) {
+           return $this->create($params);
+       } 
+
+       $this->tableGateway->update($params, array('id' => $params['id']));       
    }
 }

@@ -1,0 +1,17 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="page-header">
+            <h1><?php echo $name; ?></h1>
+            <?php if ($checkOwner === true) : ?>
+            <a href="<?php echo $this->url('edit-document', array('id' => $id)) ?>">
+                <span class="label label-primary">Editar este documento?</span>
+            </a>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <?php echo $content; ?>        
+    </div>
+</div>

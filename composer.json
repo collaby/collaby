@@ -10,7 +10,8 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zendframework": "2.*",
-	"phpunit/phpunit": "3.7.*",
-	"sebastian/environment": "1.0.*@dev"
+        "erusev/parsedown": "dev-master",
+        "phpunit/phpunit": "3.7.*",
+        "sebastian/environment": "1.0.*@dev"
     }
 }
