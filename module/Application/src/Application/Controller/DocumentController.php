@@ -90,13 +90,6 @@ class DocumentController extends ActionController {
     public function editAction() {
         $id = (int) $this->params()->fromRoute('id', 0);
         $doc = $this->getDocumentTable()->getDocument($id);
-//        $sm = $this->getServiceLocator();
-//        $session = $sm->get('Session');
-//        $user = $session->offsetGet('user');
-//        
-//        if ($user->id != $doc->owner) {
-//            return $this->redirect()->toUrl('/application/preview/id/'.$id);
-//        }
 
         return new ViewModel(array(
             'id' => $id,
@@ -137,9 +130,35 @@ class DocumentController extends ActionController {
         $doc = $this->getDocumentTable()->getDocument($id);
         $document = new Document();
         $document->exchangeArray($doc);
-        echo "<pre>";
-        var_dump($document->toArray());
-        echo "</pre>";
+        
+        $sm = $this->getServiceLocator();
+        $conn = $sm->get("Zend\Db\Adapter\Adapter")->getDriver()->getConnection();
+        $conn->beginTransaction();
+        try {
+            $date = new \DateTime('now', new \DateTimeZone('America/Fortaleza'));
+            $session = $sm->get('Session');
+            $user = $session->offsetGet('user');
+            
+            $params = $document->toArray();
+            $params['cloned_from'] = $params['id'];
+            $params['created_at'] = $date->format('Y-m-d H:i:s.u');
+            $params['owner'] = $user->id;
+            
+            // clear old id
+            unset($params['id']);
+            
+            $clone_id = $this->getDocumentTable()->create($params);
+
+            $modelDocumentTemplate = $sm->get('Application\Model\DocumentTemplateTable');
+            $modelDocumentTemplate->create($clone_id, 3); // TO-DO get template_id
+
+            $conn->commit();
+            $this->redirect()->toRoute('edit-document', array('id' => $clone_id));
+        } catch (\Exception $e) {
+            $conn->rollback();
+            $this->messages()->flashError('Unespected error. ' . $e->getMessage());
+        }
+        
         
     }
 
