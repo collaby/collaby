@@ -5,8 +5,11 @@
             <?php if ($checkOwner === true) : ?>
             <a href="<?php echo $this->url('edit-document', array('id' => $id)) ?>">
                 <span class="label label-primary">Editar este documento?</span>
-            </a>
+            </a> ou 
             <?php endif; ?>
+            <a href="<?php echo $this->url('edit-document', array('id' => $id)) ?>">
+                <span class="label label-primary">Clonar este documento?</span>
+            </a>
         </div>
     </div>
 </div>
