@@ -7,7 +7,7 @@
    <div class="col-md-6 col-md-offset-2">
       <?php foreach ($list as $item): ?>
       <div class="media">
-          <a class="pull-left" href="<?php echo $this->url('edit-document', array('id' => $item['id'])) ?>">
+          <a class="pull-left" href="<?php echo $this->url('preview-document', array('id' => $item['id'])) ?>">
                <img class="media-object" src="http://placehold.it/64&text=<?php echo $item['type_abbr']; ?>"
                     alt="<?php echo $item['type']; ?>" title="<?php echo $item['type']; ?>">
             </a>
